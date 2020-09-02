@@ -173,6 +173,20 @@
     <td>exec time is greater than consensus time</td>
   </tr>
   <tr>
+    <td rowspan="3">avg(histogram_quantile(0.90, sum(rate(muta_consensus_duration_seconds_bucket[5m])) by (le, instance))) <br>/ avg(histogram_quantile(0.90, sum(rate(muta_consensus_time_cost_seconds_bucket{type="exec"}[5m])) <br>by (le, instance))) </td>
+    <td>p0</td>
+    <td>10</td>
+    <td rowspan="3">consensus_p90</td>
+  </tr>
+  <tr>
+    <td>p1</td>
+    <td>5</td>
+  </tr>
+  <tr>
+    <td>p2</td>
+    <td>3</td>
+  </tr>
+  <tr>
     <td rowspan="2">Liveness</td>
     <td>increase(axon_consensus_height{job="axon_exporter"}[1m])</td>
     <td rowspan="2">p0</td>
