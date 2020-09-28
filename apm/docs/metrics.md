@@ -1003,13 +1003,13 @@ axon_network_connected_consensus_peers
 ```
 </details> -->
 
-#### Unidentified Connections
-- description: The number of connections in the handshake, requiring verification of the chain id
+#### Disconnected count(To other peers)
+- description: Disconnected count
 <details>
 <summary>Legende details</summary>
 
 ##### {{instance}}
-The number of connections in the handshake, requiring verification of the chain id
+Disconnected count
 ```
 axon_network_unidentified_connections
 ```
@@ -1144,6 +1144,47 @@ Rounds of consensus
 </details>
 
 
+## muta-network
+#### Network bandwidth usage per second all
+[link muta-node (Network bandwidth usage per second all)](#Network-bandwidth-usage-per-second-all)
+
+#### Internet traffic per hour
+[link muta-node (Internet traffic per hour)](#Internet-traffic-per-hour)
+
+
+#### mempool_cached_tx
+[link muta-benchmark (mempool_cached_tx)](#mempool_cached_tx)
+
+#### consensus_round_cost
+[link muta-benchmark (consensus_round_cost)](#consensus_round_cost)
+
+#### current_height
+[link muta-benchmark (current_height)](#current_height)
+
+#### synced_block
+[link muta-benchmark (synced_block)](#synced_block)
+
+#### processed_tx_request
+[link muta-benchmark (processed_tx_request)](#processed_tx_request)
+
+
+#### height and round
+- description: Height of consensus and rounds of consensus
+<details>
+<summary>Legende details</summary>
+
+##### height
+Height of consensus
+```
+muta_consensus_height{instance=~"$node"}
+```
+
+##### round
+Rounds of consensus
+```
+(muta_consensus_round{instance=~"$node"} > 0 )
+```
+</details>
 
 #### axon_network_message_size
 - description: Network transmission size statistics
