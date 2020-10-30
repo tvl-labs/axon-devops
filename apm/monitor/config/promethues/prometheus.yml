@@ -51,4 +51,4 @@ scrape_configs:
   # Loki 采集端 Promtail 的状态监控
   - job_name: 'promtail_agent'
     static_configs:
-    - targets: [promtail_agent_ip]
+    - targets: [promtail_agent_ip:9080]
