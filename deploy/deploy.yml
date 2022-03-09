@@ -124,6 +124,15 @@
         - deploy
         - config   
 
+    - name: Replace enable_profile_debug
+      replace:
+        path: "{{ deploy_path }}/config.toml"
+        regexp: '#enable_profile_debug'
+        replace: "{{ enable_profile_debug }}"
+      tags:
+        - deploy
+        - config  
+
 ###############################################################################################################
     - name: chmod axon
       shell: "chmod 777 -R {{ deploy_path }}"
