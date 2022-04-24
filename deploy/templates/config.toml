@@ -103,3 +103,20 @@ tracing_batch_size = 50
 [prometheus]
 listening_address = "0.0.0.0:8100"
 
+[cross_client]
+axon_udt_hash = "0xccca1b5cdede63c5cce826947dc4165e8bd0731c6e88636f3c47e8bc6a58ef03"
+ckb_uri = "https://mercury-testnet.ckbapp.dev/rpc"
+mercury_uri = "#mercury_uri"
+start_block_number = 4096800
+checkpoint_interval = 5
+pk = "0x6fc935dad260867c749cf1ba6602d5f5ed7fb1131f1beb65be2d342e912eaafe"
+enable = #enable_cross_client
+admin_address = "0x8ab0CF264DF99D83525e9E11c7e4db01558AE1b1"
+node_address = "0x8ab0CF264DF99D83525e9E11c7e4db01558AE1b1"
+selection_lock_hash = "0x32b7eebcc847220291d01191c37831f608d8b1d0eecd28f25a96d8f9f8e2482b"
+checkpoint_type_hash = "0xbc3b9e93e517482862e5928419b624b90e2824988c8f3f0e056bccaa2e4eb02b"
+
+[interoperability_extension]
+blockchain_extension_transaction_hashes = [
+    {name = "cardano", id = 2, tx_hash = "0xb1af175009413bf9670dffb7b120f0eca52896a9798bda123df9b25ff7d8f721"}
+]
