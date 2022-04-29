@@ -52,7 +52,7 @@ balance = "04ee2d6d415b85acef8100000000"
 http_listening_address = "0.0.0.0:8000"
 ws_listening_address = "0.0.0.0:8010"
 maxconn = 25000
-max_payload_size = 1048576
+max_payload_size = 10485760
 client_version = "0.1.0"
 
 
