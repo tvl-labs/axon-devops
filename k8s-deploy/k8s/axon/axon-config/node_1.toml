@@ -86,13 +86,12 @@ listening_address = "0.0.0.0:8100"
 
 [cross_client]
 axon_udt_hash = "0xf32ec1e3274c27ac4cc018c92efec443847e9b78ba8cbedca36f0fa8c35d1c9e"
-ckb_uri = "http://47.111.84.118:81/"
+ckb_uri = "https://mercury-testnet.ckbapp.dev/rpc"
 mercury_uri = "http://127.0.0.1:8116"
 start_block_number = 4096800
 checkpoint_interval = 1000
 pk = "0x37aa0f893d05914a4def0460c0a984d3611546cfb26924d7a7ca6e0db9950a2d"
 enable = false
-
 admin_address = "0x0000000000000000000000000000000000000000"
 node_address = "0x0000000000000000000000000000000000000000"
 selection_lock_hash = "0xf32ec1e3274c27ac4cc018c92efec443847e9b78ba8cbedca36f0fa8c35d1c9e"
@@ -103,4 +102,3 @@ checkpoint_type_hash = "0xf32ec1e3274c27ac4cc018c92efec443847e9b78ba8cbedca36f0f
 blockchain_extension_transaction_hashes = [
     {name = "cardano", id = 2, tx_hash = "0xb1af175009413bf9670dffb7b120f0eca52896a9798bda123df9b25ff7d8f721"}
 ]
-

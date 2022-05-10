@@ -86,7 +86,7 @@ listening_address = "0.0.0.0:8100"
 
 [cross_client]
 axon_udt_hash = "0xf32ec1e3274c27ac4cc018c92efec443847e9b78ba8cbedca36f0fa8c35d1c9e"
-ckb_uri = "http://47.111.84.118:81/"
+ckb_uri = "https://mercury-testnet.ckbapp.dev/rpc"
 mercury_uri = "http://127.0.0.1:8116"
 start_block_number = 4096800
 checkpoint_interval = 1000
