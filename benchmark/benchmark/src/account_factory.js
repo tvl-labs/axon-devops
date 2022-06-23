@@ -61,8 +61,10 @@ class AccountFactory {
 
         await Promise.all(accounts.map((acc) => acc.updateNonce()));
 
-        return accounts;
+        await sleep(300000);
+
+        return accounts
     }
 }
 
-module.exports = AccountFactory;
+module.exports = AccountFactory
