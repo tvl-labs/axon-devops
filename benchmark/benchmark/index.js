@@ -79,7 +79,7 @@ async function init_config() {
     if (args["state_file"]) {
         config.state_file = args["state_file"];
     }
-
+    
     const hdNode = ethers.utils.HDNode.fromMnemonic(config.mnemonic);
     const keys = [];
     for (let i = 0; i < 10; i++) {
