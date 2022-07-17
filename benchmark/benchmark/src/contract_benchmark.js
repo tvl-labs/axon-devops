@@ -15,7 +15,21 @@ const ethers = require('ethers');
 
 class Benchmark {
     constructor(info) {
+<<<<<<< HEAD
         this.config = info.config;
+=======
+        let config = info.config
+        let private_key = info.private_key
+        this.config = {
+                http_endpoint: config.http_endpoint,
+                private_key : private_key,
+                continuous_benchmark: config.continuous_benchmark,
+                benchmark_time: config.benchmark_time,
+                batch_size: config.batch_size,
+                id: config.id,
+                token: config.token,
+        }
+>>>>>>> 3b2401e (fix(benchmark): fix balance (#103))
 
         this.contract = new ethers.Contract(
             info.contracts["ERC20"],
