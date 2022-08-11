@@ -16,25 +16,47 @@ const ethers = require('ethers');
 class Benchmark {
     constructor(info) {
 <<<<<<< HEAD
+<<<<<<< HEAD
         this.config = info.config;
 =======
         let config = info.config
+=======
+>>>>>>> b6423b1 (feat(benchmark): use chain_id as a configuration)
         let private_key = info.private_key
         this.config = {
-                http_endpoint: config.http_endpoint,
+                http_endpoint: info.config.http_endpoint,
                 private_key : private_key,
-                continuous_benchmark: config.continuous_benchmark,
-                benchmark_time: config.benchmark_time,
-                batch_size: config.batch_size,
-                id: config.id,
-                token: config.token,
+                continuous_benchmark: info.config.continuous_benchmark,
+                benchmark_time: info.config.benchmark_time,
+                batch_size: info.config.batch_size,
+                id: info.config.id,
+                token: info.config.token,
+                chain_id: info.config.chain_id
         }
 >>>>>>> 3b2401e (fix(benchmark): fix balance (#103))
 
+<<<<<<< HEAD
         this.contract = new ethers.Contract(
             info.contracts["ERC20"],
             ERC20JSON.abi,
         );
+=======
+        this.benchmark_info = {
+            success_tx: 0,
+            fail_tx: 0,
+            transfer_count: 0,
+            start_block_number: 0,
+            end_block_number: 0,
+            total_time: 0,
+            nonce: 0,
+        }
+
+        this.web3 = new Web3(new Web3.providers.HttpProvider(info.config.http_endpoint))
+        this.account = this.web3.eth.accounts.privateKeyToAccount(private_key)
+        this.web3.eth.defaultAccount = this.account.address
+
+        this.contract = new this.web3.eth.Contract(ERC20JSON.abi, info.contracts["ERC20"]);
+>>>>>>> b6423b1 (feat(benchmark): use chain_id as a configuration)
     }
 
     async gen_tx(account) {
@@ -89,6 +111,7 @@ class Benchmark {
                     "gasLimit": 60000,
                     "nonce": nonce,
                     "data": this.contract.methods.transfer('0x5cf83df52a32165a7f392168ac009b168c9e8915', 0).encodeABI(),
+                    "chainId": this.config.chain_id
                 }
 
                 let signed_tx = await account.signTransaction(tx)
