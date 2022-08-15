@@ -122,16 +122,7 @@
         replace: "{{ enable_cross_client }}"
       tags:
         - deploy
-        - config   
-
-    - name: Replace enable_profile_debug
-      replace:
-        path: "{{ deploy_path }}/config.toml"
-        regexp: '#enable_profile_debug'
-        replace: "{{ enable_profile_debug }}"
-      tags:
-        - deploy
-        - config  
+        - config    
 
 ###############################################################################################################
     - name: chmod axon
@@ -153,6 +144,20 @@
       shell: systemctl daemon-reload
       become: yes
       tags:
+        - start
+
+    - name: copy ckb service file
+      template:
+        src: ./templates/axon-node.service
+        dest: /etc/systemd/system/axon-node.service
+      become: yes
+      tags: 
+        - start
+
+    - name: systemctl daemon-reload
+      shell: systemctl daemon-reload
+      become: yes
+      tags: 
         - start
 
     - name: Start axon
