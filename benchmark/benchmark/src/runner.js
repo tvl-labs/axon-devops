@@ -270,6 +270,74 @@ class Runner {
         }
     }
 
+    async approveERC20({ address, signer, to, nonce }) {
+        const contract = new ethers.Contract(address, ERC20ABI, signer);
+        await (await contract.approve(
+            to,
+            ethers.constants.MaxUint256.toString(),
+            { nonce },
+        )).wait();
+
+        console.log(`\napproved ${address} from ${signer.address} to ${to}`);
+    }
+
+    async prepare() {
+        console.log('preparing...');
+
+        const nonce = await this.getNonce();
+        this.chainId = (await this.provider.getNetwork()).chainId;
+
+        const args = [
+            "Name",
+            "Symbol",
+            this.signer.address,
+            ethers.constants.MaxUint256.toString(),
+        ];
+        const [token0, token1] = await Promise.all([
+            this.deployContract("./ERC20.json", "Token0", args, nonce),
+            this.deployContract("./ERC20.json", "Token1", args, nonce + 1),
+            this.deployContract("./ERC20.json", "ERC20", args, nonce + 2),
+        ]);
+
+        await Promise.all([
+            this.approveERC20({
+                address: token0,
+                to: this.config.uniswapNonfungiblePositionManagerAddress,
+                signer: this.signer,
+                nonce: nonce + 3,
+            }),
+            this.approveERC20({
+                address: token1,
+                to: this.config.uniswapNonfungiblePositionManagerAddress,
+                signer: this.signer,
+                nonce: nonce + 4,
+            }),
+            this.approveERC20({
+                address: token0,
+                to: this.config.uniswapSwapRouterAddress,
+                signer: this.signer,
+                nonce: nonce + 5,
+            }),
+            this.approveERC20({
+                address: token1,
+                to: this.config.uniswapSwapRouterAddress,
+                signer: this.signer,
+                nonce: nonce + 6,
+            }),
+        ]);
+
+        const pool = await createPool({
+            token0,
+            token1,
+            chainId: this.chainId,
+            uniswapNonfungiblePositionManagerAddress: this.config.uniswapNonfungiblePositionManagerAddress,
+            signer: this.signer,
+        });
+        this.contracts["UniswapV3Pool"] = pool;
+
+        console.log('\nprepared');
+    }
+
     async run() {
         // let tasks = [];
         this.log_benchmark_config_info()
