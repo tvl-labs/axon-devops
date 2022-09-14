@@ -282,60 +282,74 @@ class Runner {
     }
 
     async prepare() {
-        console.log('preparing...');
+        console.log("\npreparing...");
 
-        const nonce = await this.getNonce();
         this.chainId = (await this.provider.getNetwork()).chainId;
+
+        const accountFactory = new AccountFactory(
+            this.signer,
+            this.provider,
+        );
+        this.accounts = await accountFactory.get_accounts(
+            10000000,
+            this.config.thread_num * this.accountsPerThread,
+        );
 
         const args = [
             "Name",
             "Symbol",
             this.signer.address,
-            ethers.constants.MaxUint256.toString(),
+            MINT_TOKEN_AMOUNT,
         ];
-        const [token0, token1] = await Promise.all([
-            this.deployContract("./ERC20.json", "Token0", args, nonce),
-            this.deployContract("./ERC20.json", "Token1", args, nonce + 1),
-            this.deployContract("./ERC20.json", "ERC20", args, nonce + 2),
+        const [token0, token1, erc20] = await Promise.all([
+            this.deployContract("./ERC20.json", "Token0", args),
+            this.deployContract("./ERC20.json", "Token1", args),
+            this.deployContract("./ERC20.json", "ERC20", args),
         ]);
 
+        console.log("\nMinting tokens...");
         await Promise.all([
-            this.approveERC20({
-                address: token0,
-                to: this.config.uniswapNonfungiblePositionManagerAddress,
-                signer: this.signer,
-                nonce: nonce + 3,
-            }),
-            this.approveERC20({
-                address: token1,
-                to: this.config.uniswapNonfungiblePositionManagerAddress,
-                signer: this.signer,
-                nonce: nonce + 4,
-            }),
-            this.approveERC20({
-                address: token0,
-                to: this.config.uniswapSwapRouterAddress,
-                signer: this.signer,
-                nonce: nonce + 5,
-            }),
-            this.approveERC20({
-                address: token1,
-                to: this.config.uniswapSwapRouterAddress,
-                signer: this.signer,
-                nonce: nonce + 6,
-            }),
+            erc20MintToAccounts(token0, this.accounts),
+            erc20MintToAccounts(token1, this.accounts),
+            erc20MintToAccounts(erc20, this.accounts),
         ]);
+        console.log("\nTokens minted");
+
+        console.log("\nApproving tokens...");
+        await Promise.all([
+            approveERC20(
+                token0,
+                this.config.uniswapNonfungiblePositionManagerAddress,
+                this.accounts.concat([this.signer]),
+            ),
+            approveERC20(
+                token0,
+                this.config.uniswapSwapRouterAddress,
+                this.accounts.concat([this.signer]),
+            ),
+            approveERC20(
+                token1,
+                this.config.uniswapNonfungiblePositionManagerAddress,
+                this.accounts.concat([this.signer]),
+            ),
+            approveERC20(
+                token1,
+                this.config.uniswapSwapRouterAddress,
+                this.accounts.concat([this.signer]),
+            ),
+        ]);
+        console.log("\nTokens approved...");
 
         const pool = await createPool({
-            token0,
-            token1,
+            token0: token0.address,
+            token1: token1.address,
             chainId: this.chainId,
             uniswapNonfungiblePositionManagerAddress: this.config.uniswapNonfungiblePositionManagerAddress,
             signer: this.signer,
         });
         this.contracts["UniswapV3Pool"] = pool;
 
-        console.log('\nprepared');
+        console.log("\nprepared");
     }
 
     async run() {

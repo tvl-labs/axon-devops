@@ -67,4 +67,4 @@ class AccountFactory {
     }
 }
 
-module.exports = AccountFactory
+module.exports = AccountFactory;

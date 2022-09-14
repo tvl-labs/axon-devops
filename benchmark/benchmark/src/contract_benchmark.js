@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 const ERC20JSON = require("./ERC20.json");
 const ethers = require("ethers");
 =======
@@ -9,6 +10,9 @@ const logger = require('./logger');
 <<<<<<< HEAD
 >>>>>>> c8ce4c8 (feat(benchmarrk): contract support)
 =======
+=======
+const ERC20JSON = require('./ERC20.json');
+>>>>>>> 736d1ab (feat: Use ethers.js to replace web3.js)
 const ethers = require('ethers');
 >>>>>>> e6a67d2 (fix(benchmark) fix gas (#102))
 
@@ -79,22 +83,20 @@ class Benchmark {
 =======
         this.config = info.config;
 
-        this.web3 = new Web3(new Web3.providers.HttpProvider(info.config.http_endpoint));
+        this.contract = new ethers.Contract(
+            info.contracts["ERC20"],
+            ERC20JSON.abi,
+        );
 
+<<<<<<< HEAD
         this.contract = new this.web3.eth.Contract(ERC20JSON.abi, info.contracts["ERC20"]);
 
 >>>>>>> ae36ae0 (feat: uniswap v3)
         this.accounts = [];
+=======
+        this.accounts = info.accounts;
+>>>>>>> 736d1ab (feat: Use ethers.js to replace web3.js)
         this.index = 0;
-    }
-
-    async prepare() {
-        console.log('preparing for contract_benchmark.js...');
-
-        const accountFactory = new AccountFactory()
-        this.accounts = await accountFactory.get_accounts(this.config, 10000000, this.config.accounts_num);
-
-        console.log('\ncontract_benchmark.js prepared');
     }
 
     async gen_tx() {
@@ -102,17 +104,14 @@ class Benchmark {
         this.index += 1;
 
         const account = this.accounts[index % this.accounts.length];
-        const nonce = await this.web3.eth.getTransactionCount(account.address);
 
-        let tx = {
-            from: account.address,
-            to: this.contract.options.address,
-            maxPriorityFeePerGas: ethers.utils.parseUnits('2', 'gwei').toString(),
-            maxFeePerGas: ethers.utils.parseUnits('2', 'gwei').toString(),
-            gasLimit: 60000,
-            nonce: nonce + 1,
-            data: this.contract.methods.transfer('0x5cf83df52a32165a7f392168ac009b168c9e8915', 0).encodeABI(),
-        };
+        const rawTx = await this.contract
+            .connect(account)
+            .populateTransaction
+            .transfer("0x5cf83df52a32165a7f392168ac009b168c9e8915", 0);
+
+        const tx = await account.populateTransaction(rawTx);
+        account.incrementTransactionCount();
 
         return account.signTransaction(tx);
     }
