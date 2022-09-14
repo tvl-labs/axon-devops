@@ -80,8 +80,8 @@ async function init_config() {
         config.state_file = args["state_file"];
     }
 
-    if (args['wait_for_tx_mined']) {
-        config.wait_for_tx_mined = JSON.parse(args['wait_for_tx_mined']);
+    if (args["wait_for_tx_mined"]) {
+        config.wait_for_tx_mined = JSON.parse(args["wait_for_tx_mined"]);
     }
 
     const hdNode = ethers.utils.HDNode.fromMnemonic(config.mnemonic);

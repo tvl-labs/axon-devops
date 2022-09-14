@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 const ERC20JSON = require("./ERC20.json");
 const ethers = require("ethers");
 =======
@@ -15,6 +16,10 @@ const ERC20JSON = require('./ERC20.json');
 >>>>>>> 736d1ab (feat: Use ethers.js to replace web3.js)
 const ethers = require('ethers');
 >>>>>>> e6a67d2 (fix(benchmark) fix gas (#102))
+=======
+const ERC20JSON = require("./ERC20.json");
+const ethers = require("ethers");
+>>>>>>> 2c00e4a (style: formatted by eslint)
 
 class Benchmark {
     constructor(info) {
