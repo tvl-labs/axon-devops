@@ -148,6 +148,14 @@ module.exports = (async (info) => {
             }
         }
 
+        const successedCount = info.config.batch_size - failedCount;
+
+        benchmarkInfo.fail_tx += failedCount;
+        benchmarkInfo.success_tx += successedCount;
+        benchmarkInfo.transfer_count = benchmarkInfo.success_tx + benchmarkInfo.fail_tx;
+
+        logger.info(`[Thread ${info.index}] Transactions sent ${benchmarkInfo.success_tx}(+${successedCount})/${benchmarkInfo.transfer_count}(+${info.config.batch_size}).`);
+
         totalTime = performance.now() - startTime;
 
         const timeInSecond = totalTime / 1000;
