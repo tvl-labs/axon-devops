@@ -154,7 +154,7 @@ module.exports = (async (info) => {
         benchmarkInfo.success_tx += successedCount;
         benchmarkInfo.transfer_count = benchmarkInfo.success_tx + benchmarkInfo.fail_tx;
 
-        logger.info(`[Thread ${info.index}] Transactions sent ${benchmarkInfo.success_tx}(+${successedCount})/${benchmarkInfo.transfer_count}(+${info.config.batch_size}).`);
+        logger.debug(`[Thread ${info.index}] Transactions sent ${benchmarkInfo.success_tx}(+${successedCount})/${benchmarkInfo.transfer_count}(+${info.config.batch_size}).`);
 
         totalTime = performance.now() - startTime;
 
