@@ -283,6 +283,7 @@ class Runner {
 
     async prepare() {
         console.log("\npreparing...");
+        await this.signer.initNonce();
 
         this.chainId = (await this.provider.getNetwork()).chainId;
 
@@ -345,7 +346,7 @@ class Runner {
             token1: token1.address,
             chainId: this.chainId,
             uniswapNonfungiblePositionManagerAddress: this.config.uniswapNonfungiblePositionManagerAddress,
-            signer: this.signer,
+            nonceSigner: this.signer,
         });
         this.contracts["UniswapV3Pool"] = pool;
 

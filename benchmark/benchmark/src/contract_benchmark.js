@@ -3,6 +3,7 @@
 <<<<<<< HEAD
 const ERC20JSON = require("./ERC20.json");
 const ethers = require("ethers");
+<<<<<<< HEAD
 =======
 const Web3 = require('web3');
 const ERC20JSON = require('./ERC20.json');
@@ -20,6 +21,9 @@ const ethers = require('ethers');
 const ERC20JSON = require("./ERC20.json");
 const ethers = require("ethers");
 >>>>>>> 2c00e4a (style: formatted by eslint)
+=======
+const logger = require("./logger");
+>>>>>>> 3d13247 (fix: nonce manager)
 
 class Benchmark {
     constructor(info) {
@@ -111,14 +115,14 @@ class Benchmark {
         const account = this.accounts[index % this.accounts.length];
 
         const rawTx = await this.contract
-            .connect(account)
+            .connect(account.signer)
             .populateTransaction
-            .transfer("0x5cf83df52a32165a7f392168ac009b168c9e8915", 0);
+            .transfer("0x5cf83df52a32165a7f392168ac009b168c9e8915", 0, { nonce: account.getNonce() });
 
-        const tx = await account.populateTransaction(rawTx);
-        account.incrementTransactionCount();
+        const tx = await account.signer.populateTransaction(rawTx);
+        logger.debug(tx);
 
-        return account.signTransaction(tx);
+        return account.signer.signTransaction(tx);
     }
 <<<<<<< HEAD
 
