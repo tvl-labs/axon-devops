@@ -147,14 +147,11 @@ module.exports = (async (info) => {
                 await sleep(difference);
             }
         }
+        await Promise.all(usedAccounts.map((acc) => acc.initNonce()));
+        accountIndex = endIndex % accounts.length;
 
-        const successedCount = info.config.batch_size - failedCount;
-
-        benchmarkInfo.fail_tx += failedCount;
-        benchmarkInfo.success_tx += successedCount;
         benchmarkInfo.transfer_count = benchmarkInfo.success_tx + benchmarkInfo.fail_tx;
-
-        logger.debug(`[Thread ${info.index}] Transactions sent ${benchmarkInfo.success_tx}(+${successedCount})/${benchmarkInfo.transfer_count}(+${info.config.batch_size}).`);
+        logger.debug(`[Thread ${info.index}] Transactions sent ${benchmarkInfo.success_tx}/${benchmarkInfo.transfer_count}.`);
 
         totalTime = performance.now() - startTime;
 

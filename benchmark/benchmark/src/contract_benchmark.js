@@ -96,6 +96,7 @@ class Benchmark {
             info.contracts["ERC20"],
             ERC20JSON.abi,
         );
+<<<<<<< HEAD
 
 <<<<<<< HEAD
         this.contract = new this.web3.eth.Contract(ERC20JSON.abi, info.contracts["ERC20"]);
@@ -106,21 +107,17 @@ class Benchmark {
         this.accounts = info.accounts;
 >>>>>>> 736d1ab (feat: Use ethers.js to replace web3.js)
         this.index = 0;
+=======
+>>>>>>> e3e07b6 (fix: nonce hell)
     }
 
-    async gen_tx() {
-        const index = this.index;
-        this.index += 1;
-
-        const account = this.accounts[index % this.accounts.length];
-
+    async gen_tx(account) {
         const rawTx = await this.contract
             .connect(account.signer)
             .populateTransaction
             .transfer("0x5cf83df52a32165a7f392168ac009b168c9e8915", 0, { nonce: account.getNonce() });
 
         const tx = await account.signer.populateTransaction(rawTx);
-        logger.debug(tx);
 
         return account.signer.signTransaction(tx);
     }

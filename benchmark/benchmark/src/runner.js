@@ -285,7 +285,14 @@ class Runner {
         console.log("\npreparing...");
         await this.signer.initNonce();
 
-        this.chainId = (await this.provider.getNetwork()).chainId;
+        const [network, feeData] = await Promise.all([
+            this.provider.getNetwork(),
+            this.provider.getFeeData(),
+        ]);
+        this.provider.getNetwork = async () => network;
+        this.provider.getFeeData = async () => feeData;
+
+        this.chainId = network.chainId;
 
         const accountFactory = new AccountFactory(
             this.signer,
@@ -293,7 +300,8 @@ class Runner {
         );
         this.accounts = await accountFactory.get_accounts(
             10000000,
-            this.config.thread_num * this.accountsPerThread,
+            this.config.thread_num * this.config.accounts_num,
+            this.config,
         );
 
         const args = [
