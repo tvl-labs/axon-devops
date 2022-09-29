@@ -39,6 +39,10 @@ module.exports = (async (info) => {
     provider.getGasPrice = async () => feeData.gasPrice;
 
     const accounts = info.accounts.map((p) => new NonceManager(new ethers.Wallet(p, provider)));
+<<<<<<< HEAD
+=======
+    let accountIndex = 0;
+>>>>>>> 63793bf (feat: Auto retry txs)
 
     const benchmarkCases = await Promise.all(Object.entries(info.config.benchmark_cases)
         .map(async ([name, share]) => {
@@ -69,6 +73,7 @@ module.exports = (async (info) => {
         info.config.continuous_benchmark
         || info.config.benchmark_time > totalTime
     ) {
+<<<<<<< HEAD
         // Accounts [lastEndIndex, endIndex) should be updated
         const lastEndIndex = Math.floor(
             (benchmarkInfo.transfer_count - 1) / TX_PER_ACCOUNT,
@@ -88,6 +93,29 @@ module.exports = (async (info) => {
                     }),
                 ),
         );
+=======
+        // Init nonces
+        const endIndex = accountIndex + info.config.batch_size;
+        let accountsToUse;
+        if (info.config.batch_size >= accounts.length) {
+            accountsToUse = accounts;
+        } else {
+            accountsToUse = accounts.slice(accountIndex, endIndex);
+            if (endIndex > accounts.length) {
+                accountsToUse = accountsToUse.concat(
+                    accounts.slice(0, endIndex - accounts.length),
+                );
+            }
+        }
+
+        // Calculate sent tx number by nonce difference
+        const newTxCounts = await Promise.all(accountsToUse.map((acc) => acc.updateNonce()
+            .catch((err) => {
+                logger.error(`[Thread ${info.index}] `, err);
+                return 0;
+            }),
+        ));
+>>>>>>> 63793bf (feat: Auto retry txs)
         benchmarkInfo.success_tx += newTxCounts.reduce((tot, i) => tot + i, 0);
 
         // Generate txs to be sent
@@ -104,9 +132,13 @@ module.exports = (async (info) => {
                 }
                 const transferCount = benchmarkInfo.transfer_count + i;
                 return benchmarkCases[j].instance
+<<<<<<< HEAD
                     .gen_tx(accounts[
                         Math.floor(transferCount / TX_PER_ACCOUNT) % accounts.length
                     ])
+=======
+                    .gen_tx(accounts[(accountIndex + i) % accounts.length])
+>>>>>>> 63793bf (feat: Auto retry txs)
                     .catch((err) => {
                         benchmarkInfo.fail_tx += 1;
                         logger.error(`[Thread ${info.index}] `, err);
@@ -121,6 +153,7 @@ module.exports = (async (info) => {
                 .perform("sendTransaction", { signedTransaction: tx })
                 .catch((err) => {
                     benchmarkInfo.fail_tx += 1;
+<<<<<<< HEAD
                     if (err.message.includes("CommittedTx")) {
                         logger.error(`[Thread ${info.index}] `, err.message);
                     } else if (err.message.includes("ReachLimit")) {
@@ -128,6 +161,9 @@ module.exports = (async (info) => {
                     } else {
                         logger.error(`[Thread ${info.index}] `, err);
                     }
+=======
+                    logger.error(`[Thread ${info.index}] `, err);
+>>>>>>> 63793bf (feat: Auto retry txs)
                     return undefined;
                 }),
             ),
@@ -136,6 +172,7 @@ module.exports = (async (info) => {
             .forEach((hash) => logger.debug(`[Thread ${info.index}] Transaction ${hash} Sent`));
 
         // Preapre for next round
+<<<<<<< HEAD
         benchmarkInfo.transfer_count += info.config.batch_size;
 
         // Limit tps
@@ -148,10 +185,12 @@ module.exports = (async (info) => {
             }
         }
         await Promise.all(usedAccounts.map((acc) => acc.initNonce()));
+=======
+>>>>>>> 63793bf (feat: Auto retry txs)
         accountIndex = endIndex % accounts.length;
 
-        benchmarkInfo.transfer_count = benchmarkInfo.success_tx + benchmarkInfo.fail_tx;
-        logger.debug(`[Thread ${info.index}] Transactions sent ${benchmarkInfo.success_tx}/${benchmarkInfo.transfer_count}.`);
+        benchmarkInfo.transfer_count += info.config.batch_size;
+        logger.info(`[Thread ${info.index}] Transactions sent ${benchmarkInfo.success_tx}/${benchmarkInfo.transfer_count}`);
 
         totalTime = performance.now() - startTime;
 

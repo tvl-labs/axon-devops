@@ -4,6 +4,7 @@
 const ERC20JSON = require("./ERC20.json");
 const ethers = require("ethers");
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 const Web3 = require('web3');
 const ERC20JSON = require('./ERC20.json');
@@ -24,6 +25,8 @@ const ethers = require("ethers");
 =======
 const logger = require("./logger");
 >>>>>>> 3d13247 (fix: nonce manager)
+=======
+>>>>>>> 63793bf (feat: Auto retry txs)
 
 class Benchmark {
     constructor(info) {
