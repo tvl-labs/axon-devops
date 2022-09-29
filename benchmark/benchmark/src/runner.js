@@ -11,13 +11,8 @@ const AccountFactory = require("./account_factory");
 
 const MINT_TOKEN_AMOUNT = 1000000;
 
-<<<<<<< HEAD
 async function genApproveERC20Txs(contract, to, accountsWithTxs) {
     await Promise.all(accountsWithTxs.map(async ({ account, txs }) => {
-=======
-function genApproveERC20Txs(contract, to, accountsWithTxs) {
-    return Promise.all(accountsWithTxs.map(async ({ account, txs }) => {
->>>>>>> 63793bf (feat: Auto retry txs)
         txs.push(await contract.connect(account.signer)
             .populateTransaction
             .approve(
@@ -26,19 +21,12 @@ function genApproveERC20Txs(contract, to, accountsWithTxs) {
             ),
         );
     }));
-<<<<<<< HEAD
 
     return contract;
 }
 
 async function genMintERC20Txs(contract, accountsWithTxs) {
     await Promise.all(accountsWithTxs.map(async ({ account, txs }) => {
-=======
-}
-
-function genMintERC20Txs(contract, accountsWithTxs) {
-    return Promise.all(accountsWithTxs.map(async ({ account, txs }) => {
->>>>>>> 63793bf (feat: Auto retry txs)
         txs.push(await contract.connect(account.signer)
             .populateTransaction
             .mint(
@@ -47,11 +35,8 @@ function genMintERC20Txs(contract, accountsWithTxs) {
             ),
         );
     }));
-<<<<<<< HEAD
 
     return contract;
-=======
->>>>>>> 63793bf (feat: Auto retry txs)
 }
 
 async function ensureTxsSent(provider, accountsWithTxs, batchSize) {
@@ -79,11 +64,7 @@ async function ensureTxsSent(provider, accountsWithTxs, batchSize) {
                         ...tx,
                         nonce: account.getNonce(),
                     })
-<<<<<<< HEAD
                     .then(({ hash }) => provider.waitForTransaction(hash, 1, 20000).then(() => hash))
-=======
-                    .then(({ hash }) => provider.waitForTransaction(hash, 1, 10000).then(() => hash))
->>>>>>> 63793bf (feat: Auto retry txs)
                     .then((hash) => {
                         logger.debug(`[Preparing] Transaction ${hash} Sent`);
                         totalSent += 1;
@@ -163,7 +144,6 @@ class Runner {
 
     async prepare() {
         await this.signer.updateNonce();
-<<<<<<< HEAD
 
         // Reduce network usage
         const [network, feeData] = await Promise.all([
@@ -304,8 +284,6 @@ class Runner {
     async prepare() {
         console.log("\npreparing...");
         await this.signer.initNonce();
-=======
->>>>>>> 63793bf (feat: Auto retry txs)
 
         // Reduce network usage
         const [network, feeData] = await Promise.all([
