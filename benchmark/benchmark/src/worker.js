@@ -4,10 +4,13 @@ const NonceManager = require("./nonceManager");
 
 const TX_PER_ACCOUNT = 65;
 
+<<<<<<< HEAD
 function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+=======
+>>>>>>> f87a133 (feat: reuse account)
 function saturatingSlice(arr, l, r) {
     if (r - l >= arr.length) {
         return arr;
@@ -40,9 +43,12 @@ module.exports = (async (info) => {
 
     const accounts = info.accounts.map((p) => new NonceManager(new ethers.Wallet(p, provider)));
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     let accountIndex = 0;
 >>>>>>> 63793bf (feat: Auto retry txs)
+=======
+>>>>>>> f87a133 (feat: reuse account)
 
     const benchmarkCases = await Promise.all(Object.entries(info.config.benchmark_cases)
         .map(async ([name, share]) => {
@@ -74,6 +80,9 @@ module.exports = (async (info) => {
         || info.config.benchmark_time > totalTime
     ) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> f87a133 (feat: reuse account)
         // Accounts [lastEndIndex, endIndex) should be updated
         const lastEndIndex = Math.floor(
             (benchmarkInfo.transfer_count - 1) / TX_PER_ACCOUNT,
@@ -81,6 +90,7 @@ module.exports = (async (info) => {
         const endIndex = Math.floor(
             (benchmarkInfo.transfer_count + info.config.batch_size - 1) / TX_PER_ACCOUNT,
         ) + 1;
+<<<<<<< HEAD
 
         // Calculate sent tx number by nonce difference
         const newTxCounts = await Promise.all(
@@ -116,6 +126,20 @@ module.exports = (async (info) => {
             }),
         ));
 >>>>>>> 63793bf (feat: Auto retry txs)
+=======
+
+        // Calculate sent tx number by nonce difference
+        const newTxCounts = await Promise.all(
+            saturatingSlice(accounts, lastEndIndex, endIndex)
+                .map((acc) => acc
+                    .updateNonce()
+                    .catch((err) => {
+                        logger.error(`[Thread ${info.index}] `, err);
+                        return 0;
+                    }),
+                ),
+        );
+>>>>>>> f87a133 (feat: reuse account)
         benchmarkInfo.success_tx += newTxCounts.reduce((tot, i) => tot + i, 0);
 
         // Generate txs to be sent
@@ -133,12 +157,18 @@ module.exports = (async (info) => {
                 const transferCount = benchmarkInfo.transfer_count + i;
                 return benchmarkCases[j].instance
 <<<<<<< HEAD
+<<<<<<< HEAD
                     .gen_tx(accounts[
                         Math.floor(transferCount / TX_PER_ACCOUNT) % accounts.length
                     ])
 =======
                     .gen_tx(accounts[(accountIndex + i) % accounts.length])
 >>>>>>> 63793bf (feat: Auto retry txs)
+=======
+                    .gen_tx(accounts[
+                        Math.floor(transferCount / TX_PER_ACCOUNT) % accounts.length
+                    ])
+>>>>>>> f87a133 (feat: reuse account)
                     .catch((err) => {
                         benchmarkInfo.fail_tx += 1;
                         logger.error(`[Thread ${info.index}] `, err);
@@ -154,6 +184,7 @@ module.exports = (async (info) => {
                 .catch((err) => {
                     benchmarkInfo.fail_tx += 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
                     if (err.message.includes("CommittedTx")) {
                         logger.error(`[Thread ${info.index}] `, err.message);
                     } else if (err.message.includes("ReachLimit")) {
@@ -164,6 +195,13 @@ module.exports = (async (info) => {
 =======
                     logger.error(`[Thread ${info.index}] `, err);
 >>>>>>> 63793bf (feat: Auto retry txs)
+=======
+                    if (err.message.includes("CommittedTx")) {
+                        logger.error(`[Thread ${info.index}] `, err.message);
+                    } else {
+                        logger.error(`[Thread ${info.index}] `, err);
+                    }
+>>>>>>> f87a133 (feat: reuse account)
                     return undefined;
                 }),
             ),
@@ -172,6 +210,7 @@ module.exports = (async (info) => {
             .forEach((hash) => logger.debug(`[Thread ${info.index}] Transaction ${hash} Sent`));
 
         // Preapre for next round
+<<<<<<< HEAD
 <<<<<<< HEAD
         benchmarkInfo.transfer_count += info.config.batch_size;
 
@@ -189,6 +228,8 @@ module.exports = (async (info) => {
 >>>>>>> 63793bf (feat: Auto retry txs)
         accountIndex = endIndex % accounts.length;
 
+=======
+>>>>>>> f87a133 (feat: reuse account)
         benchmarkInfo.transfer_count += info.config.batch_size;
         logger.info(`[Thread ${info.index}] Transactions sent ${benchmarkInfo.success_tx}/${benchmarkInfo.transfer_count}`);
 
