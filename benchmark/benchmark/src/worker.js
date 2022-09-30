@@ -198,6 +198,8 @@ module.exports = (async (info) => {
 =======
                     if (err.message.includes("CommittedTx")) {
                         logger.error(`[Thread ${info.index}] `, err.message);
+                    } else if (err.message.includes("ReachLimit")) {
+                        logger.error(`[Thread ${info.index}] `, err.message);
                     } else {
                         logger.error(`[Thread ${info.index}] `, err);
                     }
@@ -231,8 +233,6 @@ module.exports = (async (info) => {
 =======
 >>>>>>> f87a133 (feat: reuse account)
         benchmarkInfo.transfer_count += info.config.batch_size;
-        logger.info(`[Thread ${info.index}] Transactions sent ${benchmarkInfo.success_tx}/${benchmarkInfo.transfer_count}`);
-
         totalTime = performance.now() - startTime;
 
         const timeInSecond = totalTime / 1000;
