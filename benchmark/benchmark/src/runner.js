@@ -164,6 +164,7 @@ class Runner {
                 const acc = new NonceManager(new ethers.Wallet(pk, this.provider));
                 return acc.updateNonce().then(() => acc);
             }));
+<<<<<<< HEAD
         } catch (err) { }
 
         let gotNew = false;
@@ -296,6 +297,11 @@ class Runner {
         this.provider.getGasPrice = async () => feeData.gasPrice;
 
         this.chainId = network.chainId;
+=======
+
+            return;
+        } catch (err) {}
+>>>>>>> 563aa68 (feat: save preparation result to file)
 
         const accountFactory = new AccountFactory(
             this.signer,
@@ -363,7 +369,13 @@ class Runner {
         });
         this.contracts["UniswapV3Pool"] = pool;
 
+        const content = JSON.stringify({
+            contracts: this.contracts,
+            accounts: this.accounts.map((acc) => acc.signer._signingKey().privateKey),
+        });
+        fs.writeFileSync(this.config.state_file, content);
         logger.info("[Preparing] Prepared");
+        process.exit(0);
     }
 
     async run() {
