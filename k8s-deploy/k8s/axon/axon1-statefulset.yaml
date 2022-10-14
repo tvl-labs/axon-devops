@@ -103,6 +103,8 @@ spec:
           resources: {}
           securityContext:
             privileged: true
+      imagePullSecrets:
+      - name: dockerconfigjson-github-com
       nodeSelector:
         node_name: node_1
       imagePullSecrets:

@@ -3,7 +3,7 @@
 function clean() {
     set +e
     echo "DEBUG" "Clean env to delete old axons, please wait..."
-
+    
     (kubectl get sts -n "axon" -o json | jq --raw-output '.items[].metadata.name' | grep -E "^axon" || true) | while read -r name; do
         kubectl delete sts "$name" -n "axon">/dev/null 2>&1
     done
