@@ -10,4 +10,8 @@ services:
       - ./config.json:/benchmark/config.json
       - ./state:/benchmark/state
       - ./logs:/benchmark/logs
+<<<<<<< HEAD
     command: 'node index.js --benchmark_cases="{\"./uniswapV3_benchmark\": 1}"'
+=======
+    command: 'node index.js --benchmark_cases="{\"./uniswapV3_benchmark\": 1}"'
+>>>>>>> 038be9e (feat: update benchamrk configs)
