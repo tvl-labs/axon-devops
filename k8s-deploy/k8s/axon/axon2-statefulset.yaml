@@ -93,10 +93,6 @@ spec:
           resources: {}
           securityContext:
             privileged: true
-      imagePullSecrets:
-      - name: dockerconfigjson-github-com
-      nodeSelector:
-        disktype: node2
       volumes:
         - name: config-node2
           configMap:
