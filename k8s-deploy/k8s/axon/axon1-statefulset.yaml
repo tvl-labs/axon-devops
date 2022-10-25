@@ -93,6 +93,8 @@ spec:
           resources: {}
           securityContext:
             privileged: true
+      imagePullSecrets:
+      - name: dockerconfigjson-github-com
       volumes:
         - name: config-node1
           configMap:
