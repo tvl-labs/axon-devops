@@ -16,6 +16,13 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
 
+    - name: Fetch genesis mnemonic from AWS
+      uses: aws-actions/aws-secretsmanager-get-secrets@v1
+      with:
+        secret-ids: |
+          arn:aws:secretsmanager:us-east-1:803035318642:secret:axon_node_config-VEyMb2
+        parse-json-secrets: true
+
     - name: create axon namespace
       uses: kodermax/kubectl-aws-eks@c18ef8acdb80d5311a7dd3611c57fcc70e954b37
       env:
@@ -28,7 +35,7 @@ jobs:
       env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA}}
       with:
-        args: create configmap node1-toml --from-file=./k8s-deploy/k8s/axon/axon-config/node_1.toml -o yaml --dry-run | kubectl apply -n axon -f -
+        args: create configmap node1-toml --from-file=./k8s-deploy/k8s/axon/axon-config/node_1_template.toml -o yaml --dry-run | sed -e "s/\$MNEMONIC/$MNEMONIC/g" | kubectl apply -n axon -f -
 
     - name: update node2-toml configmap
       uses: kodermax/kubectl-aws-eks@c18ef8acdb80d5311a7dd3611c57fcc70e954b37
