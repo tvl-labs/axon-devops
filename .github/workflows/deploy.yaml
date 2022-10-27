@@ -23,23 +23,23 @@ jobs:
           arn:aws:secretsmanager:us-east-1:803035318642:secret:axon_node_config-VEyMb2
         parse-json-secrets: true
 
-    - name: Replace mnemonic with AWS secret
+    - name: Replace mnemonic with AWS secret for first 2 nodes
       env:
-        NODE_1_DATA_PATH: ./devtools/chain/data1
-        NODE_2_DATA_PATH: ./devtools/chain/data2
-        NODE_3_DATA_PATH: ./devtools/chain/data3
-        NODE_4_DATA_PATH: ./devtools/chain/data4
+        NODE_1_DATA_PATH: .\/devtools\/chain\/data1
+        NODE_2_DATA_PATH: .\/devtools\/chain\/data2
+        NODE_3_DATA_PATH: .\/devtools\/chain\/data3
+        NODE_4_DATA_PATH: .\/devtools\/chain\/data4
       run: |
-        sed -i 's/__NODE_PRIVATE_KEY__/${{ env.AXON_NODE_CONFIG_NODE_1_PRIVATE_KEY }}/g' ./k8s-deploy/k8s/axon/axon-config/node_config_template.toml > ./k8s-deploy/k8s/axon/axon-config/node_1.toml
+        sed 's/__NODE_PRIVATE_KEY__/${{ env.AXON_NODE_CONFIG_NODE_1_PRIVATE_KEY }}/g' ./k8s-deploy/k8s/axon/axon-config/node_config_template.toml > ./k8s-deploy/k8s/axon/axon-config/node_1.toml
         sed -i 's/__NODE_DATA_PATH__/${{ env.NODE_1_DATA_PATH }}/g' ./k8s-deploy/k8s/axon/axon-config/node_1.toml
         sed -i 's/__MNEMONIC__/${{ env.AXON_NODE_CONFIG_MNEMONIC }}/g' ./k8s-deploy/k8s/axon/axon-config/node_1.toml
-        sed -i 's/__NODE_PRIVATE_KEY__/${{ env.AXON_NODE_CONFIG_NODE_2_PRIVATE_KEY }}/g' ./k8s-deploy/k8s/axon/axon-config/node_config_template.toml > ./k8s-deploy/k8s/axon/axon-config/node_2.toml
+        sed 's/__NODE_PRIVATE_KEY__/${{ env.AXON_NODE_CONFIG_NODE_2_PRIVATE_KEY }}/g' ./k8s-deploy/k8s/axon/axon-config/node_config_template.toml > ./k8s-deploy/k8s/axon/axon-config/node_2.toml
         sed -i 's/__NODE_DATA_PATH__/${{ env.NODE_2_DATA_PATH }}/g' ./k8s-deploy/k8s/axon/axon-config/node_2.toml
         sed -i 's/__MNEMONIC__/${{ env.AXON_NODE_CONFIG_MNEMONIC }}/g' ./k8s-deploy/k8s/axon/axon-config/node_2.toml
-        sed -i 's/__NODE_PRIVATE_KEY__/${{ env.AXON_NODE_CONFIG_NODE_3_PRIVATE_KEY }}/g' ./k8s-deploy/k8s/axon/axon-config/node_config_template.toml > ./k8s-deploy/k8s/axon/axon-config/node_3.toml
+        sed 's/__NODE_PRIVATE_KEY__/${{ env.AXON_NODE_CONFIG_NODE_3_PRIVATE_KEY }}/g' ./k8s-deploy/k8s/axon/axon-config/node_config_template.toml > ./k8s-deploy/k8s/axon/axon-config/node_3.toml
         sed -i 's/__NODE_DATA_PATH__/${{ env.NODE_3_DATA_PATH }}/g' ./k8s-deploy/k8s/axon/axon-config/node_3.toml
         sed -i 's/__MNEMONIC__/${{ env.AXON_NODE_CONFIG_MNEMONIC }}/g' ./k8s-deploy/k8s/axon/axon-config/node_3.toml
-        sed -i 's/__NODE_PRIVATE_KEY__/${{ env.AXON_NODE_CONFIG_NODE_4_PRIVATE_KEY }}/g' ./k8s-deploy/k8s/axon/axon-config/node_config_template.toml > ./k8s-deploy/k8s/axon/axon-config/node_4.toml
+        sed 's/__NODE_PRIVATE_KEY__/${{ env.AXON_NODE_CONFIG_NODE_4_PRIVATE_KEY }}/g' ./k8s-deploy/k8s/axon/axon-config/node_config_template.toml > ./k8s-deploy/k8s/axon/axon-config/node_4.toml
         sed -i 's/__NODE_DATA_PATH__/${{ env.NODE_4_DATA_PATH }}/g' ./k8s-deploy/k8s/axon/axon-config/node_4.toml
         sed -i 's/__MNEMONIC__/${{ env.AXON_NODE_CONFIG_MNEMONIC }}/g' ./k8s-deploy/k8s/axon/axon-config/node_4.toml
 
