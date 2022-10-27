@@ -90,28 +90,28 @@ jobs:
       env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA}}
       with:
-        args: delete pod axon1-0
+        args: delete pod axon1-0 --ignore-not-found=true
 
     - name: delete axon2
       uses: kodermax/kubectl-aws-eks@c18ef8acdb80d5311a7dd3611c57fcc70e954b37
       env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA}}
       with:
-        args: delete pod axon2-0
+        args: delete pod axon2-0 --ignore-not-found=true
 
     - name: delete axon3
       uses: kodermax/kubectl-aws-eks@c18ef8acdb80d5311a7dd3611c57fcc70e954b37
       env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA}}
       with:
-        args: delete pod axon3-0
+        args: delete pod axon3-0 --ignore-not-found=true
 
     - name: delete axon4
       uses: kodermax/kubectl-aws-eks@c18ef8acdb80d5311a7dd3611c57fcc70e954b37
       env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA}}
       with:
-        args: delete pod axon4-0
+        args: delete pod axon4-0 --ignore-not-found=true
 
     - name: apply axon1
       uses: kodermax/kubectl-aws-eks@c18ef8acdb80d5311a7dd3611c57fcc70e954b37
