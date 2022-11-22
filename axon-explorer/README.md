@@ -15,7 +15,11 @@ cd axon-devops/axon-explorer
 
 ### Step 2
 ```shell
+<<<<<<< HEAD
 vim config.yml
+=======
+$ vim config.yml
+>>>>>>> a24e994 (docs: update Step 2)
 ```
 
 ```
