@@ -1,5 +1,5 @@
 name: deploy
-on: workflow_dispatch
+on: push
 
 jobs:
   clean_and_deploy_axon:
@@ -23,7 +23,7 @@ jobs:
           arn:aws:secretsmanager:us-east-1:803035318642:secret:axon_node_config-VEyMb2
         parse-json-secrets: true
 
-    - name: Replace mnemonic with AWS secret for first 2 nodes
+    - name: Replace mnemonic with AWS secret for all nodes
       env:
         NODE_1_DATA_PATH: .\/devtools\/chain\/data1
         NODE_2_DATA_PATH: .\/devtools\/chain\/data2
