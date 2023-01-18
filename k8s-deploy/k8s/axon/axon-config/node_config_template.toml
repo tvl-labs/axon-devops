@@ -55,7 +55,7 @@ light = false
 triedb_cache_size = 2000
 
 [logger]
-filter = "debug"
+filter = "info"
 log_to_console = true
 console_show_file_and_line = false
 log_path = "logs/"
@@ -63,7 +63,7 @@ log_to_file = true
 file_size_limit = 1073741824       # 1 GiB
 metrics = true
 # you can specify log level for modules with config below
-# modules_level = { "overlord" = "debug", core_consensus = "debug", "core_network::service" = "trace", "core_network::protocols::discovery" = "debug", "core_network::protocols::feeler" = "debug", "rocksdb" = "debug" }
+modules_level = { "overlord" = "debug", core_consensus = "debug", "core_network::outbound" = "debug", "core_network::service" = "trace", "core_network::protocols::discovery" = "debug", "core_network::protocols::feeler" = "debug", "rocksdb" = "debug" }
 
 [rocksdb]
 max_open_files = 64
