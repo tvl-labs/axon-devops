@@ -33,7 +33,9 @@ metadata:
   name: axon3
   namespace: axon
 spec:
-  replicas: 1
+  replicas: 2
+  updateStrategy:
+    type: RollingUpdate
   serviceName: "axon3"
   selector:
     matchLabels:

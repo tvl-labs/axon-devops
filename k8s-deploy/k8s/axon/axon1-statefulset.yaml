@@ -33,7 +33,9 @@ metadata:
   name: axon1
   namespace: axon
 spec:
-  replicas: 1
+  replicas: 2
+  updateStrategy:
+    type: RollingUpdate
   selector:
     matchLabels:
       svc: axon-test
