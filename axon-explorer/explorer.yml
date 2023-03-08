@@ -75,6 +75,7 @@
       tags:
           - config
 
+<<<<<<< HEAD
     - name: Replace posgres_port in docker-compose.yml
       replace:
         path: "{{ deploy_path }}/docker-compose.yml"
@@ -88,11 +89,37 @@
         path: "{{ deploy_path }}/docker-compose.yml"
         regexp: "blockscan_port"
         replace: "{{ blockscan_port }}"
+=======
+    - name: Replace posgres_port in explorer.env
+      replace:
+        path: "{{ deploy_path }}/explorer.env"
+        regexp: "posgres_port"
+        replace: "{{ posgres_port }}"
+      tags:
+          - config 
+    - name: Replace posgres_port in docker-compose.yml
+      replace:
+        path: "{{ deploy_path }}/docker-compose.yml"
+        regexp: "posgres_port"
+        replace: "{{ posgres_port }}"
+      tags:
+          - config 
+
+    - name: Replace postgres_ip
+      replace:
+        path: "{{ deploy_path }}/explorer.env"
+        regexp: "postgres_ip"
+        replace: "{{ postgres_ip }}"
+>>>>>>> faed627 (refactor: update deploy script (#134))
       tags:
           - config
 
     - name: build 
+<<<<<<< HEAD
       shell: "cd {{ deploy_path }} && docker-compose --env-file ./explorer.env -f ./docker-compose.yml build blockscan"
+=======
+      shell: "cd {{ deploy_path }} && docker-compose --env-file ./dev.env -f ./docker-compose.yml build blockscan"
+>>>>>>> faed627 (refactor: update deploy script (#134))
       ignore_errors: yes
       become: yes
       become_method: sudo
@@ -100,7 +127,11 @@
         - build
 
     - name: postgres start
+<<<<<<< HEAD
       shell: "cd {{ deploy_path }} &&  docker-compose --env-file ./explorer.env  -f ./docker-compose.yml up -d --force-recreate db"
+=======
+      shell: "cd {{ deploy_path }} &&  docker-compose --env-file ./dev.env  -f ./docker-compose.yml up -d --force-recreate db"
+>>>>>>> faed627 (refactor: update deploy script (#134))
       ignore_errors: yes
       become: yes
       become_method: sudo
@@ -108,7 +139,11 @@
         - up
 
     - name: explorer start
+<<<<<<< HEAD
       shell: "cd {{ deploy_path }} &&  docker-compose --env-file ./explorer.env  -f ./docker-compose.yml up -d --force-recreate blockscan"
+=======
+      shell: "cd {{ deploy_path }} &&  docker-compose --env-file ./dev.env  -f ./docker-compose.yml up -d --force-recreate blockscan"
+>>>>>>> faed627 (refactor: update deploy script (#134))
       ignore_errors: yes
       become: yes
       become_method: sudo
