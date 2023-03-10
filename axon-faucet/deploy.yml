@@ -42,11 +42,19 @@
       tags:
           - config
 
+<<<<<<< HEAD
     - name: Replace axon_faucet_server_port
       replace:
         path: "{{ deploy_path }}/docker-compose.yml"
         regexp: "8502"
         replace: "{{ axon_faucet_server_port }}"
+=======
+    - name: Replace react_app_backend_point
+      replace:
+        path: "{{ deploy_path }}/.env"
+        regexp: "react_app_backend_point"
+        replace: "{{ react_app_backend_point }}"
+>>>>>>> 336dfab (refactor: update faucet deploy scripts)
       tags:
           - config
 
