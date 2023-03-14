@@ -105,6 +105,7 @@
       tags:
           - config 
 
+<<<<<<< HEAD
     - name: Replace postgres_ip
       replace:
         path: "{{ deploy_path }}/explorer.env"
@@ -120,6 +121,11 @@
 =======
       shell: "cd {{ deploy_path }} && docker-compose --env-file ./dev.env -f ./docker-compose.yml build blockscan"
 >>>>>>> faed627 (refactor: update deploy script (#134))
+=======
+
+    - name: build 
+      shell: "cd {{ deploy_path }} && docker-compose --env-file ./explorer.env -f ./docker-compose.yml build blockscan"
+>>>>>>> 4ff61c5 (refactor: update explorer deploy script (#136))
       ignore_errors: yes
       become: yes
       become_method: sudo
@@ -128,10 +134,14 @@
 
     - name: postgres start
 <<<<<<< HEAD
+<<<<<<< HEAD
       shell: "cd {{ deploy_path }} &&  docker-compose --env-file ./explorer.env  -f ./docker-compose.yml up -d --force-recreate db"
 =======
       shell: "cd {{ deploy_path }} &&  docker-compose --env-file ./dev.env  -f ./docker-compose.yml up -d --force-recreate db"
 >>>>>>> faed627 (refactor: update deploy script (#134))
+=======
+      shell: "cd {{ deploy_path }} &&  docker-compose --env-file ./explorer.env  -f ./docker-compose.yml up -d --force-recreate db"
+>>>>>>> 4ff61c5 (refactor: update explorer deploy script (#136))
       ignore_errors: yes
       become: yes
       become_method: sudo
@@ -140,10 +150,14 @@
 
     - name: explorer start
 <<<<<<< HEAD
+<<<<<<< HEAD
       shell: "cd {{ deploy_path }} &&  docker-compose --env-file ./explorer.env  -f ./docker-compose.yml up -d --force-recreate blockscan"
 =======
       shell: "cd {{ deploy_path }} &&  docker-compose --env-file ./dev.env  -f ./docker-compose.yml up -d --force-recreate blockscan"
 >>>>>>> faed627 (refactor: update deploy script (#134))
+=======
+      shell: "cd {{ deploy_path }} &&  docker-compose --env-file ./explorer.env  -f ./docker-compose.yml up -d --force-recreate blockscan"
+>>>>>>> 4ff61c5 (refactor: update explorer deploy script (#136))
       ignore_errors: yes
       become: yes
       become_method: sudo
