@@ -43,6 +43,7 @@
           - config
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     - name: Replace axon_faucet_server_port
       replace:
         path: "{{ deploy_path }}/docker-compose.yml"
@@ -57,6 +58,8 @@
 >>>>>>> 336dfab (refactor: update faucet deploy scripts)
       tags:
           - config
+=======
+>>>>>>> da97cd4 (refactor: faucet deploy script update)
 
     - name: Replace mongodb_url
       replace:
