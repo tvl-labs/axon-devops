@@ -85,6 +85,27 @@
     - name: Replace bootstraps
       shell:  sed -i "s/#bootstraps/{{ bootstraps }}/g" "{{ deploy_path }}/config.toml"
       tags:
+<<<<<<< HEAD
+        - deploy
+        - config
+
+    - name: Replace mercury
+      replace:
+        path: "{{ deploy_path }}/config.toml"
+        regexp: '#mercury_uri'
+        replace: "{{ mercury_uri }}"
+      tags:
+        - deploy
+        - config
+
+    - name: Replace enable_cross_client
+      replace:
+        path: "{{ deploy_path }}/config.toml"
+        regexp: '#enable_cross_client'
+        replace: "{{ enable_cross_client }}"
+      tags:
+=======
+>>>>>>> 235df73 (refactor: ignore error if shuedown fialed)
         - deploy
         - config
 
@@ -105,24 +126,6 @@
       tags:
         - deploy
         - config
-
-    - name: Replace mercury
-      replace:
-        path: "{{ deploy_path }}/config.toml"
-        regexp: '#mercury_uri'
-        replace: "{{ mercury_uri }}"
-      tags:
-        - deploy
-        - config
-
-    - name: Replace enable_cross_client
-      replace:
-        path: "{{ deploy_path }}/config.toml"
-        regexp: '#enable_cross_client'
-        replace: "{{ enable_cross_client }}"
-      tags:
-        - deploy
-        - config    
 
 ###############################################################################################################
     - name: chmod axon
@@ -130,6 +133,7 @@
       become: yes
       become_method: sudo
       tags:
+<<<<<<< HEAD
         - start
 
     - name: copy ckb service file
@@ -144,6 +148,8 @@
       shell: systemctl daemon-reload
       become: yes
       tags:
+=======
+>>>>>>> 235df73 (refactor: ignore error if shuedown fialed)
         - start
 
     - name: copy ckb service file
@@ -151,13 +157,13 @@
         src: ./templates/axon-node.service
         dest: /etc/systemd/system/axon-node.service
       become: yes
-      tags: 
+      tags:
         - start
 
     - name: systemctl daemon-reload
       shell: systemctl daemon-reload
       become: yes
-      tags: 
+      tags:
         - start
 
     - name: Start axon
