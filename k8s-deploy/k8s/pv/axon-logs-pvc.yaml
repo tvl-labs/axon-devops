@@ -3,6 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   creationTimestamp: null
   name: axon-logs-pvc
+  namespace: axon
 spec:
   storageClassName: axon-logs
   accessModes:

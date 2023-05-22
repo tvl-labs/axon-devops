@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+    name: node3-pv-volume
+    labels:
+        node: node3
+spec:
+    storageClassName: axon-node-storage-3
+    capacity:
+        storage: 10Gi
+    accessModes:
+        - ReadWriteOnce
+    hostPath:
+        path: "/Users/serejke/.axon/node-3a"

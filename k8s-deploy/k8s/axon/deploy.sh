@@ -2,17 +2,18 @@
 
 function clean() {
     set +e
-    echo "DEBUG" "Clean env to delete old axons, please wait..."
+    echo "DEBUG" "Cleanup all resources from 'axon' namespace"
+    kubectl delete statefulset,pvc,pv,cm --all -n axon
+}
 
-    (kubectl get sts -n "axon" -o json | jq --raw-output '.items[].metadata.name' | grep -E "^axon" || true) | while read -r name; do
-        kubectl delete sts "$name" -n "axon">/dev/null 2>&1
-    done
-    (kubectl get pvc -n "axon" -o json | jq --raw-output '.items[].metadata.name' | grep -E "^data" || true) | while read -r name; do
-        kubectl delete pvc "$name" -n "axon">/dev/null 2>&1
-    done
-    (kubectl get cm -n "axon" -o json | jq --raw-output '.items[].metadata.name' | grep -v "^kube" || true) | while read -r name; do
-        kubectl delete cm "$name" -n "axon">/dev/null 2>&1
-    done
+function create_local_node_persistent_volumes() {
+    echo "DEBUG" "create local node persistent volumes..."
+    mkdir -p /Users/serejke/.axon/node-1a
+    mkdir -p /Users/serejke/.axon/node-2a
+    mkdir -p /Users/serejke/.axon/node-3a
+    mkdir -p /Users/serejke/.axon/node-4a
+    mkdir -p /Users/serejke/.axon/logs
+    kubectl apply -f ./local-pvs -n axon
 }
 
 function create_configmap() {
@@ -32,8 +33,7 @@ function deploy_axon(){
     kubectl apply -f ./axon3-statefulset.yaml
     kubectl apply -f ./axon4-statefulset.yaml
     kubectl apply -f ./axon-chain.yaml
-    kubectl apply -f ./axon-servicemonitor.yaml
-    kubectl apply -f ../ingress/axon-ingress.yaml
+#    kubectl apply -f ../ingress/axon-ingress.yaml
     kubectl apply -f ../pv/axon-logs-pv.yaml
     kubectl apply -f ../pv/axon-logs-pvc.yaml
     echo "DEBUG" "waiting for axons running..."
@@ -50,6 +50,7 @@ function deploy_axon(){
 function main() {
     case $1 in
         "deploy")
+            create_local_node_persistent_volumes
             create_configmap
             deploy_axon
         ;;

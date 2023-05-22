@@ -57,7 +57,7 @@ spec:
             - ./axon
             - -c=/app/devtools/chain/k8s/node_2.toml
             - -g=/app/devtools/chain/genesis.json
-          image: ghcr.io/tvl-labs/axon:0.0.5
+          image: sergeitvl/axon-m1:v0.1.0-beta.1
           volumeMounts:
           - name: config-node2
             mountPath: /app/devtools/chain/k8s/node_2.toml
@@ -109,7 +109,10 @@ spec:
       name: data2
     spec:
       accessModes: ["ReadWriteOnce"]
-      storageClassName: gp2
+      storageClassName: axon-node-storage-2
+      selector:
+        matchLabels:
+          node: node2
       resources:
         requests:
-          storage: 100Gi
+          storage: 5Gi

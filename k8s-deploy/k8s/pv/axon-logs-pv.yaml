@@ -5,6 +5,7 @@ metadata:
   labels:
     type: local
   name: axon-logs-pv
+  namespace: axon
 spec:
   storageClassName: axon-logs
   accessModes:
@@ -12,5 +13,4 @@ spec:
   capacity:
     storage: 4Gi
   hostPath:
-    path: "/home/ckb/k8s-deploy/k8s-deploy/logs"
-    
+    path: "/Users/serejke/.axon/logs"
