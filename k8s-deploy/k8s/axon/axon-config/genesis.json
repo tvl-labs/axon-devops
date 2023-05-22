@@ -19,21 +19,10 @@
       "base_fee_per_gas": "0x539",
       "proof": {
         "number": 0,
-        "gas_used": "0x0",
-        "gas_limit": "0x0",
-        "extra_data": [],
-        "mixed_hash": null,
-        "nonce": "0x0000000000000000",
-        "base_fee_per_gas": "0x539",
-        "proof": {
-          "number": 0,
-          "round": 0,
-          "block_hash": "0x0000000000000000000000000000000000000000000000000000000000000000",
-          "signature": [],
-          "bitmap": []
-        },
-        "call_system_script_count": 0,
-        "chain_id": 2022
+        "round": 0,
+        "block_hash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "signature": [],
+        "bitmap": []
       },
       "last_checkpoint_block_hash": "0x0000000000000000000000000000000000000000000000000000000000000000",
       "call_system_script_count": 0,
