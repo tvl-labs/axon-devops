@@ -53,6 +53,7 @@ spec:
         app: axon1
         logging: "true"
     spec:
+      serviceAccountName: axon-node
       containers:
         - name: axon1
           args:

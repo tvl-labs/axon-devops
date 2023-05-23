@@ -53,6 +53,7 @@ spec:
         app: axon4
         logging: "true"
     spec:
+      serviceAccountName: axon-node
       containers:
         - name: axon4
           args:
