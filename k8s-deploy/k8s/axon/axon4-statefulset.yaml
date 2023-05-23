@@ -7,22 +7,22 @@ metadata:
   namespace: axon
 spec:
   ports:
-  - name: p2p
-    port: 8001
-    targetPort: 8001
-    protocol: TCP
-  - name: rpc
-    port: 8000
-    targetPort: 8000
-    protocol: TCP
-  - name: websocket
-    port: 8010
-    targetPort: 8010
-    protocol: TCP
-  - name: prometheus
-    port: 8100
-    targetPort: 8100
-    protocol: TCP
+    - name: p2p
+      port: 8001
+      targetPort: 8001
+      protocol: TCP
+    - name: rpc
+      port: 8000
+      targetPort: 8000
+      protocol: TCP
+    - name: websocket
+      port: 8010
+      targetPort: 8010
+      protocol: TCP
+    - name: prometheus
+      port: 8100
+      targetPort: 8100
+      protocol: TCP
   selector:
     app: axon4
   type: ClusterIP
@@ -58,7 +58,12 @@ spec:
             - -c=/app/devtools/chain/k8s/node_4.toml
             - -g=/app/devtools/chain/genesis.json
           image: axonweb3/axon:v0.1.0-beta.1
-
+          env:
+            - name: NODE_PRIVATE_KEY_4
+              valueFrom:
+                secretKeyRef:
+                  name: khalani-testnet-nodes-private-keys
+                  key: NODE_PRIVATE_KEY_4
           volumeMounts:
           - name: config-node4
             mountPath: /app/devtools/chain/k8s/node_4.toml
@@ -72,6 +77,9 @@ spec:
           - name: data4
             mountPath: /app/devtools/chain/data4
             subPath: data4
+          - name: secrets-store-inline # The volume mount is required for the Sync With Kubernetes Secrets
+            mountPath: "/mnt/secrets-store"
+            readOnly: true
           ports:
           - name: p2p
             containerPort: 8001
@@ -104,6 +112,12 @@ spec:
         - name: config-db-options
           configMap:
             name: db-options
+        - name: secrets-store-inline
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "khalani-testnet-nodes-secret-class"
       restartPolicy: Always
   volumeClaimTemplates:
   - metadata:

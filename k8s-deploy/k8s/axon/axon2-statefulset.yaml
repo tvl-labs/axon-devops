@@ -58,6 +58,12 @@ spec:
             - -c=/app/devtools/chain/k8s/node_2.toml
             - -g=/app/devtools/chain/genesis.json
           image: axonweb3/axon:v0.1.0-beta.1
+          env:
+            - name: NODE_PRIVATE_KEY_2
+              valueFrom:
+                secretKeyRef:
+                  name: khalani-testnet-nodes-private-keys
+                  key: NODE_PRIVATE_KEY_2
           volumeMounts:
           - name: config-node2
             mountPath: /app/devtools/chain/k8s/node_2.toml
@@ -71,6 +77,9 @@ spec:
           - name: data2
             mountPath: /app/devtools/chain/data2
             subPath: data2
+          - name: secrets-store-inline # The volume mount is required for the Sync With Kubernetes Secrets
+            mountPath: "/mnt/secrets-store"
+            readOnly: true
           ports:
           - name: p2p
             containerPort: 8001
@@ -103,6 +112,12 @@ spec:
         - name: config-db-options
           configMap:
             name: db-options
+        - name: secrets-store-inline
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "khalani-testnet-nodes-secret-class"
       restartPolicy: Always
   volumeClaimTemplates:
   - metadata:
