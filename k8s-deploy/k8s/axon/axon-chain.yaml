@@ -4,7 +4,7 @@ metadata:
   labels:
     app: axon-chain
   name: axon-chain
-  namespace: axon
+  namespace: khalani-testnet
 spec:
   ports:
     - name: axon-chain

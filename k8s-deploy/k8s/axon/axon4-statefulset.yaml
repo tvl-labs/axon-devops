@@ -4,7 +4,7 @@ metadata:
   labels:
     app: axon4
   name: axon4
-  namespace: axon
+  namespace: khalani-testnet
 spec:
   ports:
     - name: p2p
@@ -31,7 +31,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: axon4
-  namespace: axon
+  namespace: khalani-testnet
 spec:
   replicas: 1
   serviceName: "axon4"
