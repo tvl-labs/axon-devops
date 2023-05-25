@@ -104,7 +104,7 @@ spec:
           securityContext:
             privileged: true
       nodeSelector:
-        node_name: node_    
+        node_name: node_2    
       imagePullSecrets:
       - name: dockerconfigjson-github-com
       volumes:
@@ -124,21 +124,13 @@ spec:
             volumeAttributes:
               secretProviderClass: "khalani-testnet-nodes-secret-class"
       restartPolicy: Always
-  # volumeClaimTemplates:
-  # - metadata:
-  #     name: data2
-  #   spec:
-  #     accessModes: ["ReadWriteOnce"]
-  #     storageClassName: gp2
-  #     resources:
-  #       requests:
-  #         storage: 100Gi
   volumeClaimTemplates:
   - metadata:
       name: data2
     spec:
       accessModes: ["ReadWriteOnce"]
-      storageClassName: standard
+      storageClassName: gp2
       resources:
         requests:
-          storage: 1Gi
+          storage: 100Gi
+
