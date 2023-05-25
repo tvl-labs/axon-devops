@@ -101,15 +101,8 @@ spec:
           resources: {}
           securityContext:
             privileged: true
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingRequiredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: node_name
-                operator: In
-                values:
-                - node_4      
+      nodeSelector:
+        node_name: node_4    
       imagePullSecrets:
       - name: dockerconfigjson-github-com
       volumes:
