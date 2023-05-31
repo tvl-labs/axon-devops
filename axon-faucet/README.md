@@ -71,5 +71,9 @@ $ make stop
 ```
 ### Visit the faucet website
 
+<<<<<<< HEAD
 http://192.168.1.100:8502  # 192.168.1.100 is your server ip , 8502 is your axon_faucet_server_port
+=======
+http://Your server IP:axon_faucet_server_port
+>>>>>>> c132355 (Add faucet access port can be customized to replace)
 

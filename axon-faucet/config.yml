@@ -3,10 +3,15 @@ faucet_repo: "https://github.com/axonweb3/axon-faucet.git"
 faucet_branch: "master"
 axon_faucet_rpc_url: http://xxxx.xxx.xxx.xxx:8000
 <<<<<<< HEAD
+<<<<<<< HEAD
 axon_faucet_server_port: "8502"
 axon_faucet_claim_value: "1000000000000000000"
 =======
 axon_faucet_claim_value: 1000000000000000000
 >>>>>>> da97cd4 (refactor: faucet deploy script update)
+=======
+axon_faucet_server_port: "8502"
+axon_faucet_claim_value: "1000000000000000000"
+>>>>>>> c132355 (Add faucet access port can be customized to replace)
 mongodb_password: mongodbpassword
 mongodb_url: mongodb://root:mongodbpassword@faucet-mongo:27017

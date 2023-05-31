@@ -44,11 +44,15 @@
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> c132355 (Add faucet access port can be customized to replace)
     - name: Replace axon_faucet_server_port
       replace:
         path: "{{ deploy_path }}/docker-compose.yml"
         regexp: "8502"
         replace: "{{ axon_faucet_server_port }}"
+<<<<<<< HEAD
 =======
     - name: Replace react_app_backend_point
       replace:
@@ -60,6 +64,10 @@
           - config
 =======
 >>>>>>> da97cd4 (refactor: faucet deploy script update)
+=======
+      tags:
+          - config
+>>>>>>> c132355 (Add faucet access port can be customized to replace)
 
     - name: Replace mongodb_url
       replace:
