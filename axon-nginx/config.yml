@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 enable_access_log: "false"
 nginx_port: "8500"
 
 
+=======
+enable_access_log: "true"
+nginx_port: "8500"
+>>>>>>> 8068cf8 (Log modification json format)
