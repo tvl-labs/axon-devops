@@ -8,6 +8,7 @@
   ###############################################################################################################
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     - name: down
       shell: "docker-compose down"
@@ -25,6 +26,8 @@
         - start
 
 >>>>>>> 8068cf8 (Log modification json format)
+=======
+>>>>>>> a753e9b (Adjusting the order of deployment tasks)
     - name: Clean axon logs
       file:
         path: ./logs
@@ -60,6 +63,9 @@
       tags:
         - config
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> a753e9b (Adjusting the order of deployment tasks)
 
     - name: down
       shell: "docker-compose down"
@@ -75,5 +81,8 @@
       become_method: sudo
       tags:
         - start
+<<<<<<< HEAD
 =======
 >>>>>>> 8068cf8 (Log modification json format)
+=======
+>>>>>>> a753e9b (Adjusting the order of deployment tasks)
