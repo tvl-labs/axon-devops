@@ -104,10 +104,14 @@ Editor config.yml
 
 ```yml
 <<<<<<< HEAD
+<<<<<<< HEAD
 enable_access_log: "false"
 =======
 enable_access_log: "true"
 >>>>>>> 8068cf8 (Log modification json format)
+=======
+enable_access_log: "false"
+>>>>>>> 9ce7e55 (nginx disables logging by default)
 nginx_port: "8500"                                 
 ```
 
