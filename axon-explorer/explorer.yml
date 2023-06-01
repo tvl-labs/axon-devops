@@ -76,6 +76,7 @@
           - config
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     - name: Replace posgres_port in docker-compose.yml
       replace:
         path: "{{ deploy_path }}/docker-compose.yml"
@@ -97,6 +98,8 @@
         replace: "{{ posgres_port }}"
       tags:
           - config 
+=======
+>>>>>>> b1f9c90 (Add blockscan port configurable)
     - name: Replace posgres_port in docker-compose.yml
       replace:
         path: "{{ deploy_path }}/docker-compose.yml"
@@ -105,6 +108,7 @@
       tags:
           - config 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     - name: Replace postgres_ip
       replace:
@@ -122,6 +126,15 @@
       shell: "cd {{ deploy_path }} && docker-compose --env-file ./dev.env -f ./docker-compose.yml build blockscan"
 >>>>>>> faed627 (refactor: update deploy script (#134))
 =======
+=======
+    - name: Replace blockscan_port in docker-compose.yml
+      replace:
+        path: "{{ deploy_path }}/docker-compose.yml"
+        regexp: "blockscan_port"
+        replace: "{{ blockscan_port }}"
+      tags:
+          - config
+>>>>>>> b1f9c90 (Add blockscan port configurable)
 
     - name: build 
       shell: "cd {{ deploy_path }} && docker-compose --env-file ./explorer.env -f ./docker-compose.yml build blockscan"

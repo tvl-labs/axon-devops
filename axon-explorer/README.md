@@ -16,10 +16,14 @@ cd axon-devops/axon-explorer
 ### Step 2
 ```shell
 <<<<<<< HEAD
+<<<<<<< HEAD
 vim config.yml
 =======
 $ vim config.yml
 >>>>>>> a24e994 (docs: update Step 2)
+=======
+vim config.yml
+>>>>>>> b1f9c90 (Add blockscan port configurable)
 ```
 
 ```
