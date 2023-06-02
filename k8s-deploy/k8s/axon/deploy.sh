@@ -13,6 +13,7 @@ function clean() {
     (kubectl get cm -n "axon" -o json | jq --raw-output '.items[].metadata.name' | grep -v "^kube" || true) | while read -r name; do
         kubectl delete cm "$name" -n "axon">/dev/null 2>&1
     done
+    kubectl delete namespace axon
 }
 
 function create_configmap() {
