@@ -53,6 +53,7 @@ balance = "04ee2d6d415b85acef8100000000"
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 metadata_contract_address = "0xb00d616b820c39619ee29e5144d0226cf8b5c15a"
 crosschain_contract_address = "0xb484fd480e598621638f380f404697cd9f58b0f8"
@@ -64,6 +65,8 @@ balance = "56bc75e2d63100000"
 =======
 >>>>>>> dd75c37 (refactor: update config file due to pr 1162)
 
+=======
+>>>>>>> 23f084a (refactor: update config file)
 [rpc]
 http_listening_address = "0.0.0.0:8000"
 ws_listening_address = "0.0.0.0:8010"
@@ -71,6 +74,9 @@ maxconn = 25000
 max_payload_size = 1048576
 client_version = "0.1.0"
 
+[web3]
+max_gas_cap = 50_000_000
+log_filter_max_block_range = 25000
 
 [network]
 listening_address = "/ip4/0.0.0.0/tcp/8001"
