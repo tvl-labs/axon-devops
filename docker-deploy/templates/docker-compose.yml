@@ -1,23 +1,107 @@
+# version: '3'
+
+# services:
+#   axon:
+#     container_name: axon
+#     image: axonweb3/axon:v0.1.0-beta.1
+#     restart: always
+#     privileged: true
+#     ports:
+#       - 8000:8000
+#       - 8001:8001
+#       - 8100:8100
+#     volumes:
+#       - ./devtools:/app/devtools
+#       - ./logs:/app/logs
+#     networks:
+#       - axon-net
+#     command: ./axon -c=/app/devtools/chain/config.toml -g=/app/devtools/chain/genesis.json
+
+
+# networks:
+#   axon-net:
+
 version: '3'
 
 services:
-  axon:
-    container_name: axon
-    image: zhengjianhui/axon:latest
+  axon1:
+    container_name: axon1
+    image: axonweb3/axon:v0.1.0-beta.1
     restart: always
     privileged: true
+    environment: 
+      RUST_BACKTRACE : 1
     ports:
       - 8000:8000
       - 8001:8001
       - 8100:8100
     volumes:
-      - ./devtools:/app/devtools
+      # - ./devtools/chain/k8s/node_1.toml:/app/devtools/chain/k8s/node_1.toml
+      - ./home/ubuntu/axon-devops/k8s-deploy/k8s/axon/axon-config:/app/devtools
+      # - ./devtools/chain/genesis.json:/app/devtools/chain/genesis.json
       - ./logs:/app/logs
     networks:
       - axon-net
-    command: ./axon -c=/app/devtools/chain/config.toml -g=/app/devtools/chain/genesis.json
+    # command: ./axon -c=/app/devtools/chain/k8s/node_1.toml -g=/app/devtools/chain/genesis.json
+    command: ./axon -c=/app/devtools/axon-config/node_1.toml -g=/app/devtools/axon-config/genesis.json
 
+
+  axon2:
+    container_name: axon2
+    image: axonweb3/axon:v0.1.0-beta.1
+    restart: always
+    privileged: true
+    ports:
+      - 8100:8000
+      - 8101:8001
+      - 8200:8100
+    volumes:
+      # - ./devtools/chain/k8s/node_1.toml:/app/devtools/chain/k8s/node_1.toml
+      - ./home/ubuntu/axon-devops/k8s-deploy/k8s/axon/axon-config:/app/devtools
+      # - ./devtools/chain/genesis.json:/app/devtools/chain/genesis.json
+      - ./logs:/app/logs
+    networks:
+      - axon-net
+    # command: ./axon -c=/app/devtools/chain/k8s/node_1.toml -g=/app/devtools/chain/genesis.json
+    command: ./axon -c=/app/devtools/axon-config/node_2.toml -g=/app/devtools/axon-config/genesis.json
+
+  axon3:
+    container_name: axon3
+    image: axonweb3/axon:v0.1.0-beta.1
+    restart: always
+    privileged: true
+    ports:
+      - 8200:8000
+      - 8201:8001
+      - 8300:8100
+    volumes:
+      # - ./devtools/chain/k8s/node_1.toml:/app/devtools/chain/k8s/node_1.toml
+      - ./home/ubuntu/axon-devops/k8s-deploy/k8s/axon/axon-config:/app/devtools
+      # - ./devtools/chain/genesis.json:/app/devtools/chain/genesis.json
+      - ./logs:/app/logs
+    networks:
+      - axon-net
+    # command: ./axon -c=/app/devtools/chain/k8s/node_1.toml -g=/app/devtools/chain/genesis.json
+    command: ./axon -c=/app/devtools/axon-config/node_3.toml -g=/app/devtools/axon-config/genesis.json
+
+  axon4:
+    container_name: axon4
+    image: axonweb3/axon:v0.1.0-beta.1
+    restart: always
+    privileged: true
+    ports:
+      - 8300:8000
+      - 8301:8001
+      - 8400:8100
+    volumes:
+      # - ./devtools/chain/k8s/node_1.toml:/app/devtools/chain/k8s/node_1.toml
+      - ./home/ubuntu/axon-devops/k8s-deploy/k8s/axon/axon-config:/app/devtools
+      # - ./devtools/chain/genesis.json:/app/devtools/chain/genesis.json
+      - ./logs:/app/logs
+    networks:
+      - axon-net
+    # command: ./axon -c=/app/devtools/chain/k8s/node_1.toml -g=/app/devtools/chain/genesis.json
+    command: ./axon -c=/app/devtools/axon-config/node_4.toml -g=/app/devtools/axon-config/genesis.json
 
 networks:
   axon-net:
-
