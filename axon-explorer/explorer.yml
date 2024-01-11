@@ -15,87 +15,137 @@
         force: yes
       become: yes
       become_method: sudo
-      tags: 
+      tags:
+        - config
+
+    - name: Copy the axon file
+      copy:
+        src: ./templates/
+        dest: "{{ deploy_path }}"
+        mode: 0755
+      tags:
+        - deploy
         - config
 
     - name: Replace jsonrpc_http_url
       replace:
-        path: "{{ deploy_path }}/axon_staging.env"
+        path: "{{ deploy_path }}/explorer.env"
         regexp: "jsonrpc_http_url"
         replace: "{{ jsonrpc_http_url }}"
       tags:
-          - config
+        - config
 
     - name: Replace jsonrpc_trace_url
       replace:
-        path: "{{ deploy_path }}/axon_staging.env"
+        path: "{{ deploy_path }}/explorer.env"
         regexp: "jsonrpc_trace_url"
         replace: "{{ jsonrpc_trace_url }}"
       tags:
-          - config
+        - config
 
-    - name: Replace postgres_user
+    - name: Replace postgres_user in explorer.env
       replace:
-        path: "{{ deploy_path }}/axon_staging.env"
+        path: "{{ deploy_path }}/explorer.env"
         regexp: "postgres_user"
         replace: "{{ postgres_user }}"
       tags:
-          - config
+        - config
 
-    - name: Replace postgres_user
+    - name: Replace postgres_user in docker-compose.yml
       replace:
-        path: "{{ deploy_path }}/axon_staging.env"
+        path: "{{ deploy_path }}/docker-compose.yml"
         regexp: "postgres_user"
         replace: "{{ postgres_user }}"
       tags:
-          - config
+        - config
 
-    - name: Replace postgres_password
+    - name: Replace postgres_password in explorer.env
       replace:
-        path: "{{ deploy_path }}/axon_staging.env"
+        path: "{{ deploy_path }}/explorer.env"
         regexp: "postgres_password"
         replace: "{{ postgres_password }}"
       tags:
-          - config
+        - config
 
-    - name: Replace postgres_ip
+    - name: Replace postgres_password in docker-compose.yml
       replace:
-        path: "{{ deploy_path }}/axon_staging.env"
-        regexp: "postgres_ip"
-        replace: "{{ postgres_ip }}"
+        path: "{{ deploy_path }}/docker-compose.yml"
+        regexp: "postgres_password"
+        replace: "{{ postgres_password }}"
       tags:
-          - config
+        - config
 
-    - name: Replace posgres_port
+    - name: Replace posgres_port in docker-compose.yml
       replace:
-        path: "{{ deploy_path }}/axon_staging.env"
+        path: "{{ deploy_path }}/docker-compose.yml"
         regexp: "posgres_port"
         replace: "{{ posgres_port }}"
       tags:
-          - config
+        - config
 
-    - name: build 
-      shell: "cd {{ deploy_path }} && docker-compose --env-file ./axon_staging.env -f ./docker-compose.yml build axon_explorer"
+    - name: Replace blockscan_port in docker-compose.yml
+      replace:
+        path: "{{ deploy_path }}/docker-compose.yml"
+        regexp: "blockscan_port"
+        replace: "{{ blockscan_port }}"
+    - name: Replace posgres_port in docker-compose.yml
+      replace:
+        path: "{{ deploy_path }}/docker-compose.yml"
+        regexp: "posgres_port"
+        replace: "{{ posgres_port }}"
+      tags:
+        - config
+
+    - name: Replace postgres_ip
+      replace:
+        path: "{{ deploy_path }}/explorer.env"
+        regexp: "postgres_ip"
+        replace: "{{ postgres_ip }}"
+      tags:
+        - config
+
+    - name: build
+      shell: "cd {{ deploy_path }} && docker-compose --env-file ./explorer.env -f ./docker-compose.yml build blockscan"
+    - name: Replace blockscan_port in docker-compose.yml
+      replace:
+        path: "{{ deploy_path }}/docker-compose.yml"
+        regexp: "blockscan_port"
+        replace: "{{ blockscan_port }}"
+      tags:
+        - config
+
+    - name: build
+      shell: "cd {{ deploy_path }} && docker-compose --env-file ./explorer.env -f ./docker-compose.yml build blockscan"
+
       ignore_errors: yes
       become: yes
       become_method: sudo
-      tags: 
+      tags:
         - build
 
-    - name: explorer start
-      shell: "cd {{ deploy_path }} &&  docker-compose --env-file ./axon_staging.env -f ./docker-compose.yml up -d --force-recreate axon_explorer"
+    - name: postgres start
+      shell: "cd {{ deploy_path }} &&  docker-compose --env-file ./explorer.env  -f ./docker-compose.yml up -d --force-recreate db"
+
       ignore_errors: yes
       become: yes
       become_method: sudo
       tags:
         - up
 
-    - name: down 
+    - name: explorer start
+      shell: "cd {{ deploy_path }} &&  docker-compose --env-file ./explorer.env  -f ./docker-compose.yml up -d --force-recreate blockscan"
+      ignore_errors: yes
+      become: yes
+      become_method: sudo
+      tags:
+        - up
+
+    - name: down
       shell: "docker-compose -f {{ deploy_path }}/docker-compose.yml down"
       ignore_errors: yes
       become: yes
       become_method: sudo
-      tags: 
+      tags:
         - down
 
     ###############################################################################################################

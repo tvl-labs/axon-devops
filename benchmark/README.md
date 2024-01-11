@@ -7,26 +7,27 @@
     - [主要 benchmark 如下:](#主要-benchmark-如下)
     - [benchmark 目录](#benchmark-目录)
     - [src](#src)
-    - [index.js](#index.js)
-    - [Dockerfile](#Dockerfile)
-    - [config.json](#config.json)
-  - [benchmark-monitor 详解](#benchmark-monitor-详解)
+    - [index.js](#indexjs)
+    - [Dockerfile](#dockerfile)
+    - [config.json](#configjson)
+  - [Benchmark Monitor 详解](#benchmark-monitor-详解)
     - [benchmark-monitor 目录](#benchmark-monitor-目录)
-      - [docker-compose.yml](#docker-compose.yml)
-      - [config 目录](#config-目录)
+    - [docker-compose.yml](#docker-composeyml)
+    - [config 目录](#config-目录)
   - [deploy 详解](#deploy-详解)
     - [主要文件如下:](#主要文件如下)
     - [deploy 目录](#deploy-目录)
-      - [Makefile](#Makefile)
-      - [config.yml](#config.yml)
-      - [hosts](#hosts)
-      - [deploy.yml](#deploy.yml)
-      - [docker-compose.yml](#docker-compose.yml-1)
-      - [node_batchsize_threadnum.yml](#node_batchsize_threadnum.yml)
-      - [templates 目录](#templates-目录)
-        - [config.json](#config.json-1)
+    - [Makefile](#makefile)
+    - [deploy.yml](#deployyml)
+    - [docker-compose.yml-1](#docker-composeyml-1)
+    - [hosts](#hosts)
+    - [node\_batchsize\_threadnum.yml](#node_batchsize_threadnumyml)
+    - [config.yml](#configyml)
+    - [templates 目录](#templates-目录)
+      - [config.json-1](#configjson-1)
+        - [](#)
   - [部署步骤](#部署步骤)
-    - [make 命令一键部署](#make-命令一键部署)
+    - [make-命令一键部署](#make-命令一键部署)
     - [nodejs-启动](#nodejs-启动)
 
 <!-- /TOC -->
@@ -140,6 +141,12 @@ axon 压测主要配置参数
     # Axon chain id
     "mnemonic": "test test test test test test test test test test test junk",
     #助记词字符串
+    "uniswapFactoryAddress": "0x21915b79E1d334499272521a3508061354D13FF0",
+    #Uniswap 合约压测需要，部署Uniswap之后的v3CoreFactoryAddress的value
+    "uniswapNonfungiblePositionManagerAddress": "0xf4AE7E15B1012edceD8103510eeB560a9343AFd3",
+    #Uniswap 合约压测需要，部署Uniswap之后的nonfungibleTokenPositionManagerAddress的value
+    "uniswapSwapRouterAddress": "0x18eb8AF587dcd7E4F575040F6D800a6B5Cef6CAf",
+    #Uniswap 合约压测需要，部署Uniswap之后的swapRouter02的value
     "mnemonic_index": 0,
     # 助记词 index
     "continuous_benchmark": false,
@@ -154,8 +161,19 @@ axon 压测主要配置参数
     # discord webhook id
     "token": "#token",
     # dicord webhook token
-    "benchmark_cases": ["./benchmark", "./contract_benchmark"]
-    # 压测用例，普通压测或者合约压测
+    "benchmark_cases": {
+        "./benchmark": 1,
+        "./contract_benchmark": 1,
+        "./uniswapV3_benchmark": 1
+    },
+    # 压测用例，普通压测或者合约压测或者uniswapV3 压测
+    "log_level": "info",
+    # benchmark 压测的log 级别，debug 或者info
+    "max_tps": 0,
+    #用来指定发交易的速度上限， <= 0 为无限制。
+    方便控制速度不把交易池塞满了
+    "state_file": "./state/state.json"
+    #压测开始先把Prepare 结果存到文件里，然后退出。再二次运行检测到有这个文件，自动读取然后开始压测
 }
 ```
 
@@ -330,6 +348,12 @@ docker-compose 启动benchmark 时，所需要的配置文件
     # Axon chain id
     "mnemonic": "test test test test test test test test test test test junk",
     #助记词字符串
+    "uniswapFactoryAddress": "0x21915b79E1d334499272521a3508061354D13FF0",
+    #Uniswap 合约压测需要，部署Uniswap之后的v3CoreFactoryAddress的value
+    "uniswapNonfungiblePositionManagerAddress": "0xf4AE7E15B1012edceD8103510eeB560a9343AFd3",
+    #Uniswap 合约压测需要，部署Uniswap之后的nonfungibleTokenPositionManagerAddress的value
+    "uniswapSwapRouterAddress": "0x18eb8AF587dcd7E4F575040F6D800a6B5Cef6CAf",
+    #Uniswap 合约压测需要，部署Uniswap之后的swapRouter02的value
     "mnemonic_index": 0,
     # 助记词 index
     "continuous_benchmark": false,
@@ -344,8 +368,19 @@ docker-compose 启动benchmark 时，所需要的配置文件
     # discord webhook id
     "token": "#token",
     # dicord webhook token
-    "benchmark_cases": ["./benchmark", "./contract_benchmark"]
-    # 压测用例，普通压测或者合约压测
+    "benchmark_cases": {
+        "./benchmark": 1,
+        "./contract_benchmark": 1,
+        "./uniswapV3_benchmark": 1
+    },
+    # 压测用例，普通压测或者合约压测或者uniswapV3 压测
+    "log_level": "info",
+    # benchmark 压测的log 级别，debug 或者info
+    "max_tps": 0,
+    #用来指定发交易的速度上限， <= 0 为无限制。
+    方便控制速度不把交易池塞满了
+    "state_file": "./state/state.json"
+    #压测开始先把Prepare 结果存到文件里，然后退出。再二次运行检测到有这个文件，自动读取然后开始压测
 }
 ```
 
@@ -365,6 +400,8 @@ $ cd axon-devops/benchmark/deploy
 - hosts
 - node_batchsize_threadnum.yml
 - config.yml
+
+如果是Uniswap v3压测，请先参考[Uniswap v3部署](https://github.com/axonweb3/axon-devops/blob/main/uni/README.md#v3-deploy)来部署uniswap，并将输出暂存，以便修改压测config.json
 
 之后使用 make 命令 启动/停止服务
 ```shell

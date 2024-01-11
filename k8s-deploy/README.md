@@ -1,36 +1,37 @@
 
 <!-- TOC -->
 
-- [axon k8s 部署](#axon-k8s-部署)
+- [axon 部署](#axon-部署)
   - [目录结构](#目录结构)
-    - [axon-目录](#axon-目录)
-      - [axon1-statefulset.yaml](#axon1-statefulset.yaml)
-      - [axon2-statefulset.yaml](#axon2-statefulset.yaml)
-      - [axon3-statefulset.yaml](#axon3-statefulset.yaml)
-      - [axon4-statefulset.yaml](#axon4-statefulset.yaml)
-      - [axon-chain.yaml](#axon-chain.yaml)
-      - [deploy.sh](#deploy.sh)
-      - [axon-config-目录](#axon-config-目录)
-        - [genesis.json](#genesis.json)
-        - [node_1.toml](#node_1.toml)
-        - [node_2.toml](#node_2.toml)
-        - [node_3.toml](#node_3.toml)
-        - [node_4.toml](#node_4.toml)
-        - [default.db-options](#default.db-options)
+    - [axon 目录.](#axon-目录)
+    - [axon1-statefulset.yaml](#axon1-statefulsetyaml)
+    - [axon2-statefulset.yaml](#axon2-statefulsetyaml)
+    - [axon3-statefulset.yaml](#axon3-statefulsetyaml)
+    - [axon4-statefulset.yaml](#axon4-statefulsetyaml)
+    - [axon-chain.yaml](#axon-chainyaml)
+    - [deploy.sh](#deploysh)
+    - [axon config 目录](#axon-config-目录)
+    - [genesis.json](#genesisjson)
+    - [node\_1.toml](#node_1toml)
+    - [node\_2.toml](#node_2toml)
+    - [node\_3.toml](#node_3toml)
+    - [node\_4.toml](#node_4toml)
+    - [default.db-options](#defaultdb-options)
     - [axon-benchmark-目录](#axon-benchmark-目录)
-      - [axon-benchmark.yaml](#axon-benchmark.yaml)
-      - [axon-chain-to-axon-ns.yaml](#axon-chain-to-axon-ns.yaml)
-      - [deploy.sh](#benchmark_deploy.sh)
-      - [axon-benchmark-configmap-目录](#axon-benchmark-configmap-目录)
-        - [config.json](#config.json)
+    - [axon-benchmark.yaml](#axon-benchmarkyaml)
+    - [axon-chain-to-axon-ns.yaml](#axon-chain-to-axon-nsyaml)
+    - [benchmark\_deploy.sh](#benchmark_deploysh)
+    - [axon-benchmark-configmap-目录](#axon-benchmark-configmap-目录)
+    - [config.json](#configjson)
     - [axon-fluntd-目录](#axon-fluntd-目录)
-      - [fluentd-daemonset.yaml](#fluentd-daemonset.yaml)
-      - [fluentd-configmap.yaml](#fluentd-configmap.yaml)
-      - [deploy.sh](#fluentd-deploy.sh)
+    - [fluentd-daemonset.yaml](#fluentd-daemonsetyaml)
+    - [fluentd-configmap.yaml](#fluentd-configmapyaml)
+    - [fluentd-deploy.sh](#fluentd-deploysh)
   - [部署步骤](#部署步骤)
+    - [pre-requried](#pre-requried)
     - [axon-k8s-部署步骤](#axon-k8s-部署步骤)
-    - [axon-k8s-benchmark-部署步骤](#axon-k8s-benchmark-部署步骤)
-    - [axon-k8s-fluentd-部署步骤](#axon-k8s-fluentd-部署步骤)
+  - [axon-k8s-benchmark-部署步骤](#axon-k8s-benchmark-部署步骤)
+  - [axon-k8s-fluentd-部署步骤](#axon-k8s-fluentd-部署步骤)
 
 <!-- /TOC -->
 
@@ -62,14 +63,14 @@ k8s-deploy
 |        |____axon-benchmark.yaml
 |        |____axon-chain-to-axon-ns.yaml
 |        |____deploy.sh
-|    |___ eks
+|    |___ logging
 |        |fluent
 |           |deploy.sh
 |           |____fluentd-configmap.yaml
 |           |____fluentd-daemonset.yaml
 |    |___ ingress
 |        |____axon-ingress.yaml
-|___ Makefile
+|___ |___ Makefile
 
 ```
 
@@ -275,6 +276,13 @@ $ cd axon-devops/k8s-deploy/k8s
 - genesis.json
 - default.db-options
 
+给 k8s 节点添加标签,node-name 替换为节点名称
+```
+kubectl label nodes <node-name> disktype=node1
+kubectl label nodes <node-name> disktype=node2
+kubectl label nodes <node-name> disktype=node3
+kubectl label nodes <node-name> disktype=node4
+```
 
 之后使用 make 命令 启动/停止服务
 ```shell

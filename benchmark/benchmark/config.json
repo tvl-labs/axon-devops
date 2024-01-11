@@ -13,12 +13,8 @@
     "accounts_num": #accounts_num,
     "id": "936501604767629344",
     "token": "#token",
-    "benchmark_cases": {
-        "./benchmark": 1,
-        "./contract_benchmark": 1,
-        "./uniswapV3_benchmark": 1
-    },
-    "log_level": "info",
-    "max_tps": 0,
-    "state_file": "./state.json"
+    "benchmark_cases": [
+        "./benchmark",
+        "./contract_benchmark"
+    ]
 }

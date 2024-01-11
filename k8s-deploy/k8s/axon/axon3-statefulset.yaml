@@ -34,6 +34,8 @@ metadata:
   namespace: axon
 spec:
   replicas: 1
+  updateStrategy:
+    type: RollingUpdate
   serviceName: "axon3"
   selector:
     matchLabels:
@@ -101,8 +103,6 @@ spec:
           resources: {}
           securityContext:
             privileged: true
-      nodeSelector:
-        node_name: node_3  
       imagePullSecrets:
       - name: dockerconfigjson-github-com
       volumes:

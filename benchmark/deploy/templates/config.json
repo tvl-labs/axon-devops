@@ -20,4 +20,8 @@
     "log_level": "info",
     "max_tps": 50,
     "state_file": "./state/state.json"
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 038be9e (feat: update benchamrk configs)

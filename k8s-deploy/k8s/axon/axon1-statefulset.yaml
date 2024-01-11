@@ -34,6 +34,8 @@ metadata:
   namespace: axon
 spec:
   replicas: 1
+  updateStrategy:
+    type: RollingUpdate
   selector:
     matchLabels:
       svc: axon-test
@@ -101,8 +103,6 @@ spec:
           resources: {}
           securityContext:
             privileged: true
-      nodeSelector:
-        node_name: node_1
       imagePullSecrets:
       - name: dockerconfigjson-github-com
       volumes:
