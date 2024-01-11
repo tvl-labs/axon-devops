@@ -41,15 +41,20 @@
         replace: "{{ axon_faucet_claim_value }}"
       tags:
           - config
-
     - name: Replace axon_faucet_server_port
       replace:
         path: "{{ deploy_path }}/docker-compose.yml"
         regexp: "8502"
         replace: "{{ axon_faucet_server_port }}"
+    - name: Replace react_app_backend_point
+      replace:
+        path: "{{ deploy_path }}/.env"
+        regexp: "react_app_backend_point"
+        replace: "{{ react_app_backend_point }}"
       tags:
           - config
-
+      tags:
+          - config
     - name: Replace mongodb_url
       replace:
         path: "{{ deploy_path }}/.env"

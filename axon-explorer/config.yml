@@ -7,3 +7,6 @@ postgres_user: postgres
 postgres_password: postgres
 posgres_port: "5432"
 blockscan_port: "8190"
+postgres_user:
+postgres_password:
+posgres_port:

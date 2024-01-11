@@ -103,7 +103,6 @@ Editor config.yml
 - nginx_port: nginx proxy axon rpc port
 
 ```yml
-enable_access_log: "false"
 nginx_port: "8500"                                 
 ```
 

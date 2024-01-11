@@ -7,6 +7,21 @@
   tasks:
   ###############################################################################################################
 
+    - name: down
+      shell: "docker-compose down"
+      ignore_errors: yes
+      become: yes
+      become_method: sudo
+      tags: 
+        - down
+
+    - name: start 
+      shell: "docker-compose up -d"
+      become: yes
+      become_method: sudo
+      tags: 
+        - start
+
     - name: Clean axon logs
       file:
         path: ./logs
@@ -41,18 +56,3 @@
         replace: "{{ nginx_port }}"
       tags:
         - config
-
-    - name: down
-      shell: "docker-compose down"
-      ignore_errors: yes
-      become: yes
-      become_method: sudo
-      tags:
-        - down
-
-    - name: start
-      shell: "docker-compose up -d"
-      become: yes
-      become_method: sudo
-      tags:
-        - start

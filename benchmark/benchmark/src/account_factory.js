@@ -40,7 +40,15 @@ class AccountFactory {
                 txs.map(
                     async ([res, acc]) => {
                         try {
+<<<<<<< HEAD
+<<<<<<< HEAD
                             await this.provider.waitForTransaction(res.hash, 1, 20000);
+=======
+                            await this.provider.waitForTransaction(res.hash, 1, 10000);
+>>>>>>> 63793bf (feat: Auto retry txs)
+=======
+                            await this.provider.waitForTransaction(res.hash, 1, 20000);
+>>>>>>> 563aa68 (feat: save preparation result to file)
                             logger.debug(`[Account Factory] Transaction ${res.hash} Sent`);
                             accounts.push(acc);
                         } catch (err) {
@@ -61,7 +69,9 @@ class AccountFactory {
 
         await Promise.all(accounts.map((acc) => acc.updateNonce()));
 
-        return accounts;
+        await sleep(300000);
+
+        return accounts
     }
 }
 
