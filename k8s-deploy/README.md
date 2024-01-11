@@ -4,10 +4,10 @@
 - [axon 部署](#axon-部署)
   - [目录结构](#目录结构)
     - [axon 目录.](#axon-目录)
-    - [axon1-statefulset.yaml](#axon1-statefulsetyaml)
-    - [axon2-statefulset.yaml](#axon2-statefulsetyaml)
-    - [axon3-statefulset.yaml](#axon3-statefulsetyaml)
-    - [axon4-statefulset.yaml](#axon4-statefulsetyaml)
+    - [axon-1-statefulset.yaml](#axon-1-statefulsetyaml)
+    - [axon-2-statefulset.yaml](#axon-2-statefulsetyaml)
+    - [axon-3-statefulset.yaml](#axon-3-statefulsetyaml)
+    - [axon-4-statefulset.yaml](#axon-4-statefulsetyaml)
     - [axon-chain.yaml](#axon-chainyaml)
     - [deploy.sh](#deploysh)
     - [axon config 目录](#axon-config-目录)
@@ -52,10 +52,10 @@ k8s-deploy
 |           |____node_3.toml
 |           |____node_4.toml
 |        |____axon-chain.yaml
-|        |____axon1-statefulset.yaml
-|        |____axon2-statefulset.yaml
-|        |____axon3-statefulset.yaml
-|        |____axon4-statefulset.yaml
+|        |____axon-1-statefulset.yaml
+|        |____axon-2-statefulset.yaml
+|        |____axon-3-statefulset.yaml
+|        |____axon-4-statefulset.yaml
 |        |____deploy.sh
 |    |___ benchmark
 |        |____configmap
@@ -85,37 +85,37 @@ k8s-deploy
           |____node_3.toml
           |____node_4.toml
        |____axon-chain.yaml
-       |____axon1-statefulset.yaml
-       |____axon2-statefulset.yaml
-       |____axon3-statefulset.yaml
-       |____axon4-statefulset.yaml
+       |____axon-1-statefulset.yaml
+       |____axon-2-statefulset.yaml
+       |____axon-3-statefulset.yaml
+       |____axon-4-statefulset.yaml
        |____deploy.sh
  
 ```
 
-<a id="markdown-axon1-statefulset.yaml" name="axon1-statefulset.yaml"></a>
-### axon1-statefulset.yaml
+<a id="markdown-axon-1-statefulset.yaml" name="axon-1-statefulset.yaml"></a>
+### axon-1-statefulset.yaml
 k8s axon node1 部署文件.
 
-[axon1-statefulset.yaml](https://github.com/axonweb3/axon-devops/blob/main/k8s-deploy/k8s/axon/axon1-statefulset.yaml)
+[axon-1-statefulset.yaml](https://github.com/axonweb3/axon-devops/blob/main/k8s-deploy/k8s/axon/axon-1-statefulset.yaml)
 
-<a id="markdown-axon2-statefulset.yaml" name="axon2-statefulset.yaml"></a>
-### axon2-statefulset.yaml
+<a id="markdown-axon-2-statefulset.yaml" name="axon-2-statefulset.yaml"></a>
+### axon-2-statefulset.yaml
 k8s axon node2 部署文件.
 
-[axon2-statefulset.yaml](https://github.com/axonweb3/axon-devops/blob/main/k8s-deploy/k8s/axon/axon2-statefulset.yaml)
+[axon-2-statefulset.yaml](https://github.com/axonweb3/axon-devops/blob/main/k8s-deploy/k8s/axon/axon-2-statefulset.yaml)
 
-<a id="markdown-axon3-statefulset.yaml" name="axon3-statefulset.yaml"></a>
-### axon3-statefulset.yaml
+<a id="markdown-axon-3-statefulset.yaml" name="axon-3-statefulset.yaml"></a>
+### axon-3-statefulset.yaml
 k8s axon node3 部署文件.
 
-[axon3-statefulset.yaml](https://github.com/axonweb3/axon-devops/blob/main/k8s-deploy/k8s/axon/axon3-statefulset.yaml)
+[axon-3-statefulset.yaml](https://github.com/axonweb3/axon-devops/blob/main/k8s-deploy/k8s/axon/axon-3-statefulset.yaml)
 
-<a id="markdown-axon4-statefulset.yaml" name="axon4-statefulset.yaml"></a>
-### axon4-statefulset.yaml
+<a id="markdown-axon-4-statefulset.yaml" name="axon-4-statefulset.yaml"></a>
+### axon-4-statefulset.yaml
 k8s axon node4 部署文件.
 
-[axon4-statefulset.yaml](https://github.com/axonweb3/axon-devops/blob/main/k8s-deploy/k8s/axon/axon4-statefulset.yaml)
+[axon-4-statefulset.yaml](https://github.com/axonweb3/axon-devops/blob/main/k8s-deploy/k8s/axon/axon-4-statefulset.yaml)
 
 <a id="markdown-axon-chain.yaml" name="aaxon-chain.yaml"></a>
 ### axon-chain.yaml

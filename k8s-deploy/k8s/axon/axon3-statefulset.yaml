@@ -2,8 +2,8 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: axon3
-  name: axon3
+    app: axon-3
+  name: axon-3
   namespace: axon
 spec:
   ports:
@@ -24,23 +24,23 @@ spec:
       targetPort: 8100
       protocol: TCP
   selector:
-    app: axon3
+    app: axon-3
   type: ClusterIP
 ---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: axon3
+  name: axon-3
   namespace: axon
 spec:
   replicas: 1
   updateStrategy:
     type: RollingUpdate
-  serviceName: "axon3"
+  serviceName: "axon-3"
   selector:
     matchLabels:
       svc: axon-test
-      app: axon3
+      app: axon-3
       logging: "true"
   template:
     metadata:
@@ -50,12 +50,12 @@ spec:
       creationTimestamp: null
       labels:
         svc: axon-test
-        app: axon3
+        app: axon-3
         logging: "true"
     spec:
       serviceAccountName: axon-node
       containers:
-        - name: axon3
+        - name: axon-3
           args:
             - ./axon
             - -c=/app/devtools/chain/k8s/node_3.toml
@@ -68,43 +68,43 @@ spec:
                   name: khalani-testnet-nodes-private-keys
                   key: NODE_PRIVATE_KEY_3
           volumeMounts:
-          - name: config-node3
-            mountPath: /app/devtools/chain/k8s/node_3.toml
-            subPath: node_3.toml
-          - name: config-genesis
-            mountPath: /app/devtools/chain/genesis.json
-            subPath: genesis.json
-          - name: config-db-options
-            mountPath: /app/devtools/chain/k8s/default.db-options
-            subPath: default.db-options
-          - name: data3
-            mountPath: /app/devtools/chain/data3
-            subPath: data3
-          - name: secrets-store-inline # The volume mount is required for the Sync With Kubernetes Secrets
-            mountPath: "/mnt/secrets-store"
-            readOnly: true
+            - name: config-node3
+              mountPath: /app/devtools/chain/k8s/node_3.toml
+              subPath: node_3.toml
+            - name: config-genesis
+              mountPath: /app/devtools/chain/genesis.json
+              subPath: genesis.json
+            - name: config-db-options
+              mountPath: /app/devtools/chain/k8s/default.db-options
+              subPath: default.db-options
+            - name: data3
+              mountPath: /app/devtools/chain/data3
+              subPath: data3
+            - name: secrets-store-inline # The volume mount is required for the Sync With Kubernetes Secrets
+              mountPath: "/mnt/secrets-store"
+              readOnly: true
           ports:
-          - name: p2p
-            containerPort: 8001
-          - name: rpc
-            containerPort: 8000
-          - name: websocket
-            containerPort: 8010
-          - name: prometheus
-            containerPort: 8100
+            - name: p2p
+              containerPort: 8001
+            - name: rpc
+              containerPort: 8000
+            - name: websocket
+              containerPort: 8010
+            - name: prometheus
+              containerPort: 8100
         - name: jaeger-agent-new
           image: jaegertracing/jaeger-agent:1.32
           env:
-          - name: JACGER_COLLECTOR_ADDRESS
-            value: jaeger-collector:14250
-          - name: JACGER_AGENT_PORT
-            value: "6831"
-          args: ['--reporter.grpc.host-port=$(JACGER_COLLECTOR_ADDRESS)']
+            - name: JACGER_COLLECTOR_ADDRESS
+              value: jaeger-collector:14250
+            - name: JACGER_AGENT_PORT
+              value: "6831"
+          args: ["--reporter.grpc.host-port=$(JACGER_COLLECTOR_ADDRESS)"]
           resources: {}
           securityContext:
             privileged: true
       imagePullSecrets:
-      - name: dockerconfigjson-github-com
+        - name: dockerconfigjson-github-com
       volumes:
         - name: config-node3
           configMap:
@@ -123,11 +123,11 @@ spec:
               secretProviderClass: "khalani-testnet-nodes-secret-class"
       restartPolicy: Always
   volumeClaimTemplates:
-  - metadata:
-      name: data3
-    spec:
-      accessModes: ["ReadWriteOnce"]
-      storageClassName: gp2
-      resources:
-        requests:
-          storage: 100Gi
+    - metadata:
+        name: data3
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: gp2
+        resources:
+          requests:
+            storage: 100Gi

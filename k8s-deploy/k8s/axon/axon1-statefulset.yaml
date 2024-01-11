@@ -2,8 +2,8 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: axon1
-  name: axon1
+    app: axon-1
+  name: axon-1
   namespace: axon
 spec:
   ports:
@@ -24,13 +24,13 @@ spec:
       targetPort: 8100
       protocol: TCP
   selector:
-    app: axon1
+    app: axon-1
   type: ClusterIP
 ---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: axon1
+  name: axon-1
   namespace: axon
 spec:
   replicas: 1
@@ -39,9 +39,9 @@ spec:
   selector:
     matchLabels:
       svc: axon-test
-      app: axon1
+      app: axon-1
       logging: "true"
-  serviceName: "axon1"
+  serviceName: "axon-1"
   template:
     metadata:
       annotations:
@@ -50,12 +50,12 @@ spec:
       creationTimestamp: null
       labels:
         svc: axon-test
-        app: axon1
+        app: axon-1
         logging: "true"
     spec:
       serviceAccountName: axon-node
       containers:
-        - name: axon1
+        - name: axon-1
           args:
             - ./axon
             - -c=/app/devtools/chain/k8s/node_1.toml

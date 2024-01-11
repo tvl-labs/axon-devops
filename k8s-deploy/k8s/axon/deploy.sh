@@ -29,10 +29,10 @@ function create_configmap() {
 function deploy_axon(){
     echo "DEBUG" "deploy axons, please wait..."
     kubectl apply -f ./axon-serviceaccount.yaml
-    kubectl apply -f ./axon1-statefulset.yaml
-    kubectl apply -f ./axon2-statefulset.yaml
-    kubectl apply -f ./axon3-statefulset.yaml
-    kubectl apply -f ./axon4-statefulset.yaml
+    kubectl apply -f ./axon-1-statefulset.yaml
+    kubectl apply -f ./axon-2-statefulset.yaml
+    kubectl apply -f ./axon-3-statefulset.yaml
+    kubectl apply -f ./axon-4-statefulset.yaml
     kubectl apply -f ./axon-chain.yaml
     kubectl apply -f ./axon-servicemonitor.yaml
     kubectl apply -f ../ingress/axon-ingress.yaml
