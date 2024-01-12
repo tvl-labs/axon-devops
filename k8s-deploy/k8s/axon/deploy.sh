@@ -19,11 +19,19 @@ function clean() {
 function create_configmap() {
     echo "DEBUG" "create configmap for axons, please wait..."
     kubectl create namespace axon --dry-run=client -o yaml | kubectl apply -f -
+    kubectl create configmap chainspec --from-file=./axon-config/chain-spec.toml -n axon
+    kubectl create configmap net_0_key --from-file=./axon-config/net_0.key -n axon
+    kubectl create configmap net_1_key --from-file=./axon-config/net_1.key -n axon
+    kubectl create configmap net_2_key --from-file=./axon-config/net_2.key -n axon
+    kubectl create configmap net_3_key --from-file=./axon-config/net_3.key -n axon
+    kubectl create configmap bls_0_key --from-file=./axon-config/bls_0.key -n axon
+    kubectl create configmap bls_1_key --from-file=./axon-config/bls_1.key -n axon
+    kubectl create configmap bls_2_key --from-file=./axon-config/bls_2.key -n axon
+    kubectl create configmap bls_3_key --from-file=./axon-config/bls_3.key -n axon
     kubectl create configmap node1-toml --from-file=./axon-config/node_1.toml -n axon
     kubectl create configmap node2-toml --from-file=./axon-config/node_2.toml -n axon
     kubectl create configmap node3-toml --from-file=./axon-config/node_3.toml -n axon
     kubectl create configmap node4-toml --from-file=./axon-config/node_4.toml -n axon
-    kubectl create configmap genesis --from-file=./axon-config/genesis.json -n axon
     kubectl create configmap db-options --from-file=./axon-config/default.db-options -n axon
 }
 function deploy_axon(){

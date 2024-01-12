@@ -1,0 +1,105 @@
+#
+# Data of the genesis block.
+#
+
+[genesis]
+timestamp = 1680249207
+base_fee_per_gas = "0x539"
+# The default chain id is the hexadecimal of ASCII string "Axon".
+chain_id = 0x41786f6e
+hardforks = []
+
+#
+# Accounts since the genesis block.
+#
+# WARNING: The following accounts are publicly known, DO NOT USE them in any production environment.
+# Generated with the mnemonic "test test test test test test test test test test test junk".
+
+[[accounts]]
+address = "null"
+balance = "04ee2d6d415b85acef8100000000"
+
+[[accounts]]
+address = "null"
+balance = "04ee2d6d415b85acef8100000000"
+
+[[accounts]]
+address = "null"
+balance = "04ee2d6d415b85acef8100000000"
+
+[[accounts]]
+address = "null"
+balance = "04ee2d6d415b85acef8100000000"
+
+[[accounts]]
+address = "null"
+balance = "04ee2d6d415b85acef8100000000"
+
+[[accounts]]
+address = "null"
+balance = "04ee2d6d415b85acef8100000000"
+
+[[accounts]]
+address = "null"
+balance = "04ee2d6d415b85acef8100000000"
+
+[[accounts]]
+address = "null"
+balance = "04ee2d6d415b85acef8100000000"
+
+[[accounts]]
+address = "null"
+balance = "04ee2d6d415b85acef8100000000"
+
+[[accounts]]
+address = "null"
+balance = "04ee2d6d415b85acef8100000000"
+
+#
+# Parameters which make the chain to be unique.
+#
+
+[params]
+epoch = 0
+
+[params.version]
+start = 1
+end = 100000000
+
+[params.consensus_config]
+propose_ratio = 15
+prevote_ratio = 10
+precommit_ratio = 10
+brake_ratio = 10
+tx_num_limit = 20000
+max_tx_size = 409600000
+gas_limit = 4294967295000
+interval = 3000
+
+[[params.verifier_list]]
+bls_pub_key = "null"
+pub_key = "null"
+address = "null"
+propose_weight = 1
+vote_weight = 1
+
+[[params.verifier_list]]
+bls_pub_key = "null"
+pub_key = "null"
+address = "null"
+propose_weight = 1
+vote_weight = 1
+
+[[params.verifier_list]]
+bls_pub_key = "null"
+pub_key = "null"
+address = "null"
+propose_weight = 1
+vote_weight = 1
+
+[[params.verifier_list]]
+bls_pub_key = "null"
+pub_key = "null"
+address = "null"
+propose_weight = 1
+vote_weight = 1

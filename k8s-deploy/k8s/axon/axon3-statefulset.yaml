@@ -36,12 +36,12 @@ spec:
   replicas: 1
   updateStrategy:
     type: RollingUpdate
-  serviceName: "axon-3"
   selector:
     matchLabels:
       svc: axon-test
       app: axon-3
       logging: "true"
+  serviceName: "axon-3"
   template:
     metadata:
       annotations:
@@ -56,33 +56,43 @@ spec:
       serviceAccountName: axon-node
       containers:
         - name: axon-3
+          command: ["/bin/sh", "-c"]
           args:
-            - ./axon
-            - -c=/app/devtools/chain/k8s/node_3.toml
-            - -g=/app/devtools/chain/genesis.json
+            - |
+              ./axon init --config /app/devtools/chain/k8s/node_1.toml --chain-spec /app/devtools/chain/k8s/chain-spec.toml  \
+                && sleep 5  && ./axon run --config /app/devtools/chain/k8s/node_1.toml
           image: axonweb3/axon:amd64-v0.3.1-beta
-          env:
-            - name: NODE_PRIVATE_KEY_3
-              valueFrom:
-                secretKeyRef:
-                  name: khalani-testnet-nodes-private-keys
-                  key: NODE_PRIVATE_KEY_3
+          # env:
+          #   - name: NODE_PRIVATE_KEY_1
+          #     valueFrom:
+          #       secretKeyRef:
+          #         name: khalani-testnet-nodes-private-keys
+          #         key: NODE_PRIVATE_KEY_1
           volumeMounts:
             - name: config-node3
-              mountPath: /app/devtools/chain/k8s/node_3.toml
+              mountPath: /app/devtools/chain/k8s/node_1.toml
               subPath: node_3.toml
+            - name: config-chainspec
+              mountPath: /app/devtools/chain/k8s/chain-spec.toml
+              subPath: chain-spec.toml
             - name: config-genesis
               mountPath: /app/devtools/chain/genesis.json
               subPath: genesis.json
             - name: config-db-options
               mountPath: /app/devtools/chain/k8s/default.db-options
               subPath: default.db-options
+            - name: config-node-key
+              mountPath: /app/devtools/chain/k8s/net_2.key
+              subPath: net_2.key
+            - name: config-bls-key
+              mountPath: /app/devtools/chain/k8s/bls_2.key
+              subPath: bls_2.key
             - name: data3
               mountPath: /app/devtools/chain/data3
               subPath: data3
-            - name: secrets-store-inline # The volume mount is required for the Sync With Kubernetes Secrets
-              mountPath: "/mnt/secrets-store"
-              readOnly: true
+            # - name: secrets-store-inline # The volume mount is required for the Sync With Kubernetes Secrets
+            #   mountPath: "/mnt/secrets-store"
+            #   readOnly: true
           ports:
             - name: p2p
               containerPort: 8001
@@ -108,19 +118,28 @@ spec:
       volumes:
         - name: config-node3
           configMap:
-            name: node3-toml
+            name: node1-toml
+        - name: config-chainspec
+          configMap:
+            name: chainspec
         - name: config-genesis
           configMap:
             name: genesis
         - name: config-db-options
           configMap:
             name: db-options
-        - name: secrets-store-inline
-          csi:
-            driver: secrets-store.csi.k8s.io
-            readOnly: true
-            volumeAttributes:
-              secretProviderClass: "khalani-testnet-nodes-secret-class"
+        - name: config-node-key
+          configMap:
+            name: net_2_key
+        - name: config-bls-key
+          configMap:
+            name: bls_2_key
+        # - name: secrets-store-inline
+        # csi:
+        #   driver: secrets-store.csi.k8s.io
+        #   readOnly: true
+        #   volumeAttributes:
+        #     secretProviderClass: "khalani-testnet-nodes-secret-class"
       restartPolicy: Always
   volumeClaimTemplates:
     - metadata:

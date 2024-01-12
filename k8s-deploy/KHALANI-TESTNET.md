@@ -9,16 +9,15 @@ git clone git@github.com:axonweb3/axon.git
 cd axon
 ```
 
-### Build the axon project
+### Install the axon binary in your path
 ```shell
-cd axon
-cargo build
+cargo install --path ./ --locked --force 
 ```
 
 ### Generate 4 keypairs and save them to `keys.json`
 ```shell
-cd axon
-./target/debug/axon-keypair --number 4 > keys.json
+cd ../axon-devops/k8s-deploy/k8s/axon/axon-config/
+axon generate-keypair -n 1 -p . > keys.json
 ```
 
 ### Create AWS Secrets Manager object `khalani/testnet/nodes-private-keys` 
