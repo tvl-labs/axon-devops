@@ -32,7 +32,7 @@ multi_address = "/dns4/axon-2/tcp/8001/p2p/QmaHBJqULbLGDn7Td196goNebH6XMTMMu2sKN
 multi_address = "/dns4/axon-3/tcp/8001/p2p/QmQLufVVmBuHKoYhdDCqUFYVtLYs1quryoaA1mkQYQdWkn"
 
 [[network.bootstraps]]
-multi_address = "/dns4/axon-4/tcp/8001/p2p/null"
+multi_address = "/dns4/axon-4/tcp/8001/p2p/Qme3WXs4r93MzJdjZj8f747HkQCx1Pqgfz9yfftaMtP2XG"
 
 [mempool]
 timeout_gap = 20

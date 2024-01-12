@@ -26,7 +26,7 @@ sync_txs_chunk_size = 5000
 multi_address = "/dns4/axon-1/tcp/8001/p2p/QmNk6bBwkLPuqnsrtxpp819XLZY3ymgjs3p1nKtxBVgqxj"
 
 [[network.bootstraps]]
-multi_address = "/dns4/axon-2/tcp/8001/p2p/null"
+multi_address = "/dns4/axon-2/tcp/8001/p2p/QmWzzgHtfh6q8YiAajRfFCUgwd82YN5E2M6dWuJRZJZ1WT"
 
 [[network.bootstraps]]
 multi_address = "/dns4/axon-3/tcp/8001/p2p/QmQLufVVmBuHKoYhdDCqUFYVtLYs1quryoaA1mkQYQdWkn"

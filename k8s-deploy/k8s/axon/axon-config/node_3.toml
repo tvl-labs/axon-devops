@@ -29,7 +29,7 @@ multi_address = "/dns4/axon-1/tcp/8001/p2p/QmNk6bBwkLPuqnsrtxpp819XLZY3ymgjs3p1n
 multi_address = "/dns4/axon-2/tcp/8001/p2p/QmaHBJqULbLGDn7Td196goNebH6XMTMMu2sKNNP2DiX9S2"
 
 [[network.bootstraps]]
-multi_address = "/dns4/axon-3/tcp/8001/p2p/null"
+multi_address = "/dns4/axon-3/tcp/8001/p2p/QmZ7NEppnDZEh2q5d8HhHcvvR4mtPQGLtCAeERH6wmfFPN"
 
 [[network.bootstraps]]
 multi_address = "/dns4/axon-4/tcp/8001/p2p/QmXoSkz4zkHHiFZqmDZQ4gFYtJ72uqtp4m6FX373X4VkRq"

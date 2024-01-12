@@ -23,7 +23,7 @@ rpc_timeout = 10
 sync_txs_chunk_size = 5000
 
 [[network.bootstraps]]
-multi_address = "/dns4/axon-1/tcp/8001/p2p/null"
+multi_address = "/dns4/axon-1/tcp/8001/p2p/Qma8ZpbRf7Yywwia7sY7uR83VXgm1khaM8PCBK1EA5AAb4"
 
 [[network.bootstraps]]
 multi_address = "/dns4/axon-2/tcp/8001/p2p/QmaHBJqULbLGDn7Td196goNebH6XMTMMu2sKNNP2DiX9S2"

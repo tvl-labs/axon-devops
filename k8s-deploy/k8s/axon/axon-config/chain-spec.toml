@@ -16,43 +16,43 @@ hardforks = []
 # Generated with the mnemonic "test test test test test test test test test test test junk".
 
 [[accounts]]
-address = "null"
+address = "0xc8a7d705083f6DcE9eAD7c6100505e11707d1a8D"
 balance = "04ee2d6d415b85acef8100000000"
 
 [[accounts]]
-address = "null"
+address = "0xc8a7d705083f6DcE9eAD7c6100505e11707d1a8D"
 balance = "04ee2d6d415b85acef8100000000"
 
 [[accounts]]
-address = "null"
+address = "0xc8a7d705083f6DcE9eAD7c6100505e11707d1a8D"
 balance = "04ee2d6d415b85acef8100000000"
 
 [[accounts]]
-address = "null"
+address = "0xc8a7d705083f6DcE9eAD7c6100505e11707d1a8D"
 balance = "04ee2d6d415b85acef8100000000"
 
 [[accounts]]
-address = "null"
+address = "0xc8a7d705083f6DcE9eAD7c6100505e11707d1a8D"
 balance = "04ee2d6d415b85acef8100000000"
 
 [[accounts]]
-address = "null"
+address = "0xc8a7d705083f6DcE9eAD7c6100505e11707d1a8D"
 balance = "04ee2d6d415b85acef8100000000"
 
 [[accounts]]
-address = "null"
+address = "0xc8a7d705083f6DcE9eAD7c6100505e11707d1a8D"
 balance = "04ee2d6d415b85acef8100000000"
 
 [[accounts]]
-address = "null"
+address = "0xc8a7d705083f6DcE9eAD7c6100505e11707d1a8D"
 balance = "04ee2d6d415b85acef8100000000"
 
 [[accounts]]
-address = "null"
+address = "0xc8a7d705083f6DcE9eAD7c6100505e11707d1a8D"
 balance = "04ee2d6d415b85acef8100000000"
 
 [[accounts]]
-address = "null"
+address = "0xc8a7d705083f6DcE9eAD7c6100505e11707d1a8D"
 balance = "04ee2d6d415b85acef8100000000"
 
 #
@@ -77,29 +77,29 @@ gas_limit = 4294967295000
 interval = 3000
 
 [[params.verifier_list]]
-bls_pub_key = "null"
-pub_key = "null"
-address = "null"
+bls_pub_key = "0xa80e365286164371ffb5558a5f899055ab4dcceb61d16dcc6661c0af2beaed21a0bc3d7de0b9296fa2c98ef6c9c208be"
+pub_key = "0x03c991a7b828ff38f894f0f0f84cacb420665eeff7ba99f428121027b85fc93a16"
+address = "0xc8a7d705083f6DcE9eAD7c6100505e11707d1a8D"
 propose_weight = 1
 vote_weight = 1
 
 [[params.verifier_list]]
-bls_pub_key = "null"
-pub_key = "null"
-address = "null"
+bls_pub_key = "0xa80e365286164371ffb5558a5f899055ab4dcceb61d16dcc6661c0af2beaed21a0bc3d7de0b9296fa2c98ef6c9c208be"
+pub_key = "0x03c991a7b828ff38f894f0f0f84cacb420665eeff7ba99f428121027b85fc93a16"
+address = "0xc8a7d705083f6DcE9eAD7c6100505e11707d1a8D"
 propose_weight = 1
 vote_weight = 1
 
 [[params.verifier_list]]
-bls_pub_key = "null"
-pub_key = "null"
-address = "null"
+bls_pub_key = "0xa80e365286164371ffb5558a5f899055ab4dcceb61d16dcc6661c0af2beaed21a0bc3d7de0b9296fa2c98ef6c9c208be"
+pub_key = "0x03c991a7b828ff38f894f0f0f84cacb420665eeff7ba99f428121027b85fc93a16"
+address = "0xc8a7d705083f6DcE9eAD7c6100505e11707d1a8D"
 propose_weight = 1
 vote_weight = 1
 
 [[params.verifier_list]]
-bls_pub_key = "null"
-pub_key = "null"
-address = "null"
+bls_pub_key = "0xa80e365286164371ffb5558a5f899055ab4dcceb61d16dcc6661c0af2beaed21a0bc3d7de0b9296fa2c98ef6c9c208be"
+pub_key = "0x03c991a7b828ff38f894f0f0f84cacb420665eeff7ba99f428121027b85fc93a16"
+address = "0xc8a7d705083f6DcE9eAD7c6100505e11707d1a8D"
 propose_weight = 1
 vote_weight = 1
