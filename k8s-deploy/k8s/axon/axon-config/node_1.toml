@@ -23,16 +23,16 @@ rpc_timeout = 10
 sync_txs_chunk_size = 5000
 
 [[network.bootstraps]]
-multi_address = "/dns4/axon-1/tcp/8001/p2p/Qma8ZpbRf7Yywwia7sY7uR83VXgm1khaM8PCBK1EA5AAb4"
+multi_address = "/dns4/axon-1/tcp/8001/p2p/QmSwz4L59f71zr4dMJijiZAJkiyQUxwrVUsZoLNnFy1u2Z"
 
 [[network.bootstraps]]
-multi_address = "/dns4/axon-2/tcp/8001/p2p/QmaHBJqULbLGDn7Td196goNebH6XMTMMu2sKNNP2DiX9S2"
+multi_address = "/dns4/axon-2/tcp/8001/p2p/QmSNMdjXJBFzSttHhngkti5zEuWVi3og1ZcD2HgawvCDz7"
 
 [[network.bootstraps]]
-multi_address = "/dns4/axon-3/tcp/8001/p2p/QmQLufVVmBuHKoYhdDCqUFYVtLYs1quryoaA1mkQYQdWkn"
+multi_address = "/dns4/axon-3/tcp/8001/p2p/QmRQ76FGezaEQj9xSZmMuedJFFxEjXkvXGAu7sThD36h8L"
 
 [[network.bootstraps]]
-multi_address = "/dns4/axon-4/tcp/8001/p2p/QmXoSkz4zkHHiFZqmDZQ4gFYtJ72uqtp4m6FX373X4VkRq"
+multi_address = "/dns4/axon-4/tcp/8001/p2p/QmaryZALkj67xyX4JkK1NaQWjZSvUzdW5bkLHGC8aQCiRR"
 
 [mempool]
 timeout_gap = 20

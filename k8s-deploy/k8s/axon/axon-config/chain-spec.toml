@@ -77,29 +77,29 @@ gas_limit = 4294967295000
 interval = 3000
 
 [[params.verifier_list]]
-bls_pub_key = "0xa80e365286164371ffb5558a5f899055ab4dcceb61d16dcc6661c0af2beaed21a0bc3d7de0b9296fa2c98ef6c9c208be"
-pub_key = "0x03c991a7b828ff38f894f0f0f84cacb420665eeff7ba99f428121027b85fc93a16"
-address = "0xc8a7d705083f6DcE9eAD7c6100505e11707d1a8D"
+bls_pub_key = "0xaacb29fd17e60c478ea7a9620dde7209babc8aa67a17305cdb9add98181f95106c583a4070a27ec880ee2dab61b446f2"
+pub_key = "0x0384df696abdb699fbf320926ba3da9e333c1db8a6c13bc327eca3afd3a77e6c69"
+address = "0xD30aa839D127637DeE3814A0a6721100512CB717"
 propose_weight = 1
 vote_weight = 1
 
 [[params.verifier_list]]
-bls_pub_key = "0xa80e365286164371ffb5558a5f899055ab4dcceb61d16dcc6661c0af2beaed21a0bc3d7de0b9296fa2c98ef6c9c208be"
-pub_key = "0x03c991a7b828ff38f894f0f0f84cacb420665eeff7ba99f428121027b85fc93a16"
-address = "0xc8a7d705083f6DcE9eAD7c6100505e11707d1a8D"
+bls_pub_key = "0xa4072a8381333506986130b894f6269b97c6eed3afbddd60436469f5bf68b306fc87c1de70a8085bcdc635c70a0d6734"
+pub_key = "0x02fe18bba6618b5b102ee4648fb2032b85ffb66b7ace8b9b8bdee5f3b669840aad"
+address = "0xE266d1D66dA1d308Fd9C088126cecF39149A3892"
 propose_weight = 1
 vote_weight = 1
 
 [[params.verifier_list]]
-bls_pub_key = "0xa80e365286164371ffb5558a5f899055ab4dcceb61d16dcc6661c0af2beaed21a0bc3d7de0b9296fa2c98ef6c9c208be"
-pub_key = "0x03c991a7b828ff38f894f0f0f84cacb420665eeff7ba99f428121027b85fc93a16"
-address = "0xc8a7d705083f6DcE9eAD7c6100505e11707d1a8D"
+bls_pub_key = "0x850a3e1f3225cb8d79f1b79171bf47911a7a031a616afe669467de7a5f69b23169c64b46443f865561877b354c22482b"
+pub_key = "0x03ae46bd3339ce5a7297e040e8f1784add68cd2f434f417c255ec77497b3a6884e"
+address = "0x3a60574Bb0CcD0Cc60cd5F4c4A75ec9c664DEB31"
 propose_weight = 1
 vote_weight = 1
 
 [[params.verifier_list]]
-bls_pub_key = "0xa80e365286164371ffb5558a5f899055ab4dcceb61d16dcc6661c0af2beaed21a0bc3d7de0b9296fa2c98ef6c9c208be"
-pub_key = "0x03c991a7b828ff38f894f0f0f84cacb420665eeff7ba99f428121027b85fc93a16"
-address = "0xc8a7d705083f6DcE9eAD7c6100505e11707d1a8D"
+bls_pub_key = "0xb23834d7d95557ab36e71de88867a79692016aa8c801b3098f69c88abedf2cae30e19d3fe5d0dabe65b974d943063f79"
+pub_key = "0x02aa862f5c6eb775c3c42448970dfb923791e56bc448f2362c154b0fad5d6b1322"
+address = "0x77691AA8c3B9dFf9741aB7cEE62657a4308dB57A"
 propose_weight = 1
 vote_weight = 1
