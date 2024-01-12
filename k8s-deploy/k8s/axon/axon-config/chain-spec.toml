@@ -31,7 +31,7 @@ balance = "04ee2d6d415b85acef8100000000"
 address = "0x77691AA8c3B9dFf9741aB7cEE62657a4308dB57A"
 balance = "04ee2d6d415b85acef8100000000"
 
-# Sam's Account. Take out for production
+# WARNING! Sam's Account. Take out for production
 [[accounts]]
 address = "0xe7d5869FE1955F2500987B9eCCFF0a9452c164cf"
 balance = "04ee2d6d415b85acef8100000000"
