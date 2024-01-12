@@ -5,8 +5,8 @@
 [genesis]
 timestamp = 1680249207
 base_fee_per_gas = "0x539"
-# The default chain id is the hexadecimal of ASCII string "Axon".
-chain_id = 0x41786f6e
+# Chain ID is 10012.
+chain_id = 0x271C
 hardforks = []
 
 #
@@ -16,44 +16,26 @@ hardforks = []
 # Generated with the mnemonic "test test test test test test test test test test test junk".
 
 [[accounts]]
-address = "0xc8a7d705083f6DcE9eAD7c6100505e11707d1a8D"
+address = "0xD30aa839D127637DeE3814A0a6721100512CB717"
 balance = "04ee2d6d415b85acef8100000000"
 
 [[accounts]]
-address = "0xc8a7d705083f6DcE9eAD7c6100505e11707d1a8D"
+address = "0xE266d1D66dA1d308Fd9C088126cecF39149A3892"
 balance = "04ee2d6d415b85acef8100000000"
 
 [[accounts]]
-address = "0xc8a7d705083f6DcE9eAD7c6100505e11707d1a8D"
+address = "0x3a60574Bb0CcD0Cc60cd5F4c4A75ec9c664DEB31"
 balance = "04ee2d6d415b85acef8100000000"
 
 [[accounts]]
-address = "0xc8a7d705083f6DcE9eAD7c6100505e11707d1a8D"
+address = "0x77691AA8c3B9dFf9741aB7cEE62657a4308dB57A"
 balance = "04ee2d6d415b85acef8100000000"
 
+# Sam's Account. Take out for production
 [[accounts]]
-address = "0xc8a7d705083f6DcE9eAD7c6100505e11707d1a8D"
+address = "0xe7d5869FE1955F2500987B9eCCFF0a9452c164cf"
 balance = "04ee2d6d415b85acef8100000000"
 
-[[accounts]]
-address = "0xc8a7d705083f6DcE9eAD7c6100505e11707d1a8D"
-balance = "04ee2d6d415b85acef8100000000"
-
-[[accounts]]
-address = "0xc8a7d705083f6DcE9eAD7c6100505e11707d1a8D"
-balance = "04ee2d6d415b85acef8100000000"
-
-[[accounts]]
-address = "0xc8a7d705083f6DcE9eAD7c6100505e11707d1a8D"
-balance = "04ee2d6d415b85acef8100000000"
-
-[[accounts]]
-address = "0xc8a7d705083f6DcE9eAD7c6100505e11707d1a8D"
-balance = "04ee2d6d415b85acef8100000000"
-
-[[accounts]]
-address = "0xc8a7d705083f6DcE9eAD7c6100505e11707d1a8D"
-balance = "04ee2d6d415b85acef8100000000"
 
 #
 # Parameters which make the chain to be unique.
