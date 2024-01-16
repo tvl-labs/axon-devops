@@ -4,7 +4,7 @@ metadata:
   labels:
     app: axon-4
   name: axon-4
-  namespace: axon
+  namespace: axon-trial
 spec:
   ports:
     - name: p2p
@@ -31,7 +31,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: axon-4
-  namespace: axon
+  namespace: axon-trial
 spec:
   replicas: 1
   updateStrategy:
@@ -59,8 +59,8 @@ spec:
           command: ["/bin/sh", "-c"]
           args:
             - |
-              ./axon init --config /app/devtools/chain/k8s/node_1.toml --chain-spec /app/devtools/chain/k8s/chain-spec.toml  \
-                && sleep 5  && ./axon run --config /app/devtools/chain/k8s/node_1.toml
+              ./axon init --config /app/devtools/chain/k8s/node_4.toml --chain-spec /app/devtools/chain/k8s/chain-spec.toml  \
+                && sleep 5  && ./axon run --config /app/devtools/chain/k8s/node_4.toml
           image: axonweb3/axon:amd64-v0.3.1-beta
           # env:
           #   - name: NODE_PRIVATE_KEY_1
@@ -70,14 +70,11 @@ spec:
           #         key: NODE_PRIVATE_KEY_1
           volumeMounts:
             - name: config-node4
-              mountPath: /app/devtools/chain/k8s/node_1.toml
+              mountPath: /app/devtools/chain/k8s/node_4.toml
               subPath: node_4.toml
             - name: config-chainspec
               mountPath: /app/devtools/chain/k8s/chain-spec.toml
               subPath: chain-spec.toml
-            - name: config-genesis
-              mountPath: /app/devtools/chain/genesis.json
-              subPath: genesis.json
             - name: config-db-options
               mountPath: /app/devtools/chain/k8s/default.db-options
               subPath: default.db-options
@@ -89,7 +86,7 @@ spec:
               subPath: bls_3.key
             - name: data4
               mountPath: /app/devtools/chain/data4
-              subPath: data1
+              subPath: data4
             # - name: secrets-store-inline # The volume mount is required for the Sync With Kubernetes Secrets
             #   mountPath: "/mnt/secrets-store"
             #   readOnly: true
@@ -122,18 +119,15 @@ spec:
         - name: config-chainspec
           configMap:
             name: chainspec
-        - name: config-genesis
-          configMap:
-            name: genesis
         - name: config-db-options
           configMap:
             name: db-options
         - name: config-node-key
           configMap:
-            name: net_3_key
+            name: net-3-key
         - name: config-bls-key
           configMap:
-            name: bls_3_key
+            name: bls-3-key
         # - name: secrets-store-inline
         # csi:
         #   driver: secrets-store.csi.k8s.io

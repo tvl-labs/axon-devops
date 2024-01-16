@@ -4,7 +4,7 @@ metadata:
   labels:
     app: axon-1
   name: axon-1
-  namespace: axon
+  namespace: axon-trial
 spec:
   ports:
     - name: p2p
@@ -31,7 +31,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: axon-1
-  namespace: axon
+  namespace: axon-trial
 spec:
   replicas: 1
   updateStrategy:
@@ -75,16 +75,16 @@ spec:
             - name: config-chainspec
               mountPath: /app/devtools/chain/k8s/chain-spec.toml
               subPath: chain-spec.toml
-            - name: config-genesis
-              mountPath: /app/devtools/chain/genesis.json
-              subPath: genesis.json
+            # - name: config-genesis
+            #   mountPath: /app/devtools/chain/genesis.json
+            # subPath: genesis.json
             - name: config-db-options
               mountPath: /app/devtools/chain/k8s/default.db-options
               subPath: default.db-options
-            - name: config-node-key 
+            - name: config-node-key
               mountPath: /app/devtools/chain/k8s/net_0.key
               subPath: net_0.key
-            - name: config-bls-key 
+            - name: config-bls-key
               mountPath: /app/devtools/chain/k8s/bls_0.key
               subPath: bls_0.key
             - name: data1
@@ -122,24 +122,24 @@ spec:
         - name: config-chainspec
           configMap:
             name: chainspec
-        - name: config-genesis
-          configMap:
-            name: genesis
+        # - name: config-genesis
+        #   configMap:
+        #     name: genesis
         - name: config-db-options
           configMap:
             name: db-options
         - name: config-node-key
           configMap:
-            name: net_0_key
+            name: net-0-key
         - name: config-bls-key
           configMap:
-            name: bls_0_key
+            name: bls-0-key
         # - name: secrets-store-inline
-          # csi:
-          #   driver: secrets-store.csi.k8s.io
-          #   readOnly: true
-          #   volumeAttributes:
-          #     secretProviderClass: "khalani-testnet-nodes-secret-class"
+        # csi:
+        #   driver: secrets-store.csi.k8s.io
+        #   readOnly: true
+        #   volumeAttributes:
+        #     secretProviderClass: "khalani-testnet-nodes-secret-class"
       restartPolicy: Always
   volumeClaimTemplates:
     - metadata:

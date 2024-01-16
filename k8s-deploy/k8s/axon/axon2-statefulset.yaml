@@ -4,7 +4,7 @@ metadata:
   labels:
     app: axon-2
   name: axon-2
-  namespace: axon
+  namespace: axon-trial
 spec:
   ports:
     - name: p2p
@@ -31,7 +31,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: axon-2
-  namespace: axon
+  namespace: axon-trial
 spec:
   replicas: 1
   updateStrategy:
@@ -50,7 +50,7 @@ spec:
       creationTimestamp: null
       labels:
         svc: axon-test
-        app: axon-1
+        app: axon-2
         logging: "true"
     spec:
       serviceAccountName: axon-node
@@ -70,24 +70,21 @@ spec:
           #         key: NODE_PRIVATE_KEY_1
           volumeMounts:
             - name: config-node2
-              mountPath: /app/devtools/chain/k8s/node_1.toml
-              subPath: node_1.toml
+              mountPath: /app/devtools/chain/k8s/node_2.toml
+              subPath: node_2.toml
             - name: config-chainspec
               mountPath: /app/devtools/chain/k8s/chain-spec.toml
               subPath: chain-spec.toml
-            - name: config-genesis
-              mountPath: /app/devtools/chain/genesis.json
-              subPath: genesis.json
             - name: config-db-options
               mountPath: /app/devtools/chain/k8s/default.db-options
               subPath: default.db-options
-            - name: config-node-key 
+            - name: config-node-key
               mountPath: /app/devtools/chain/k8s/net_1.key
               subPath: net_1.key
-            - name: config-bls-key 
+            - name: config-bls-key
               mountPath: /app/devtools/chain/k8s/bls_1.key
               subPath: bls_1.key
-            - name: data1
+            - name: data2
               mountPath: /app/devtools/chain/data2
               subPath: data2
             # - name: secrets-store-inline # The volume mount is required for the Sync With Kubernetes Secrets
@@ -122,24 +119,21 @@ spec:
         - name: config-chainspec
           configMap:
             name: chainspec
-        - name: config-genesis
-          configMap:
-            name: genesis
         - name: config-db-options
           configMap:
             name: db-options
         - name: config-node-key
           configMap:
-            name: net_1_key
+            name: net-1-key
         - name: config-bls-key
           configMap:
-            name: bls_1_key
+            name: bls-1-key
         # - name: secrets-store-inline
-          # csi:
-          #   driver: secrets-store.csi.k8s.io
-          #   readOnly: true
-          #   volumeAttributes:
-          #     secretProviderClass: "khalani-testnet-nodes-secret-class"
+        # csi:
+        #   driver: secrets-store.csi.k8s.io
+        #   readOnly: true
+        #   volumeAttributes:
+        #     secretProviderClass: "khalani-testnet-nodes-secret-class"
       restartPolicy: Always
   volumeClaimTemplates:
     - metadata:
