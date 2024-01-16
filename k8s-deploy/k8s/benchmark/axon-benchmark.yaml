@@ -4,7 +4,7 @@ metadata:
   labels:
     app: axon-benchmark
   name: axon-benchmark
-  namespace: axon-benchmark
+  namespace: axon-trial-benchmark
 spec:
   ports:
     - name: axon-benchmark
@@ -13,13 +13,13 @@ spec:
       protocol: TCP
   selector:
     app: axon-benchmark
-  type: ClusterIP		  
+  type: ClusterIP
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: axon-benchmark
-  namespace: axon-benchmark
+  namespace: axon-trial-benchmark
 spec:
   replicas: 1
   selector:
@@ -37,20 +37,25 @@ spec:
         app: axon-benchmark
     spec:
       containers:
-      - name: axon-benchmark
-        image: axonweb3/axon-benchmark:uniswap
-        volumeMounts:
-        - name: config-benchmark
-          mountPath: /benchmark/config.json
-          subPath: config.json
-        - name: state
-          mountPath: /benchmark/state
-          subPath: state
-        command: ["/bin/sh", "-c",'node index.js --benchmark_cases="{\"./benchmark\": 1}" ']
-        ports:
-        - containerPort: 8098
-        securityContext:
-          privileged: true
+        - name: axon-benchmark
+          image: axonweb3/axon-benchmark:uniswap
+          volumeMounts:
+            - name: config-benchmark
+              mountPath: /benchmark/config.json
+              subPath: config.json
+            - name: state
+              mountPath: /benchmark/state
+              subPath: state
+          command:
+            [
+              "/bin/sh",
+              "-c",
+              'node index.js --benchmark_cases="{\"./benchmark\": 1}" ',
+            ]
+          ports:
+            - containerPort: 8098
+          securityContext:
+            privileged: true
       volumes:
         - name: config-benchmark
           configMap:
@@ -59,4 +64,3 @@ spec:
           emptyDir: {}
       restartPolicy: Always
 status: {}
-

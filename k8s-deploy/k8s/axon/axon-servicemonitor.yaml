@@ -8,7 +8,7 @@ metadata:
 spec:
   selector:
     matchExpressions:
-      - {key: app, operator: In, values: [axon1, axon2, axon3, axon4]}
+      - { key: app, operator: In, values: [axon-1, axon-2, axon-3, axon-4] }
   namespaceSelector:
     matchNames:
       - axon

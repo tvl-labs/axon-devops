@@ -9,16 +9,15 @@ git clone git@github.com:axonweb3/axon.git
 cd axon
 ```
 
-### Build the axon project
+### Install the axon binary in your path
 ```shell
-cd axon
-cargo build
+cargo install --path ./ --locked --force 
 ```
 
 ### Generate 4 keypairs and save them to `keys.json`
 ```shell
-cd axon
-./target/debug/axon-keypair --number 4 > keys.json
+cd ../axon-devops/k8s-deploy/k8s/axon/axon-config/
+axon generate-keypair -n 1 -p . > keys.json
 ```
 
 ### Create AWS Secrets Manager object `khalani/testnet/nodes-private-keys` 
@@ -90,10 +89,10 @@ export PEER_4=$(cat keys.json | jq -r ".keypairs[3].peer_id")
 for i in {1..4}; do
     node_toml="node_$i.toml"
 
-    sed -i "" "s/multi_address = \"\/dns4\/axon1\/.*\"/multi_address = \"\/dns4\/axon1\/tcp\/8001\/p2p\/$PEER_1\"/g" ${node_toml} 
-    sed -i "" "s/multi_address = \"\/dns4\/axon2\/.*\"/multi_address = \"\/dns4\/axon2\/tcp\/8001\/p2p\/$PEER_2\"/g" ${node_toml} 
-    sed -i "" "s/multi_address = \"\/dns4\/axon3\/.*\"/multi_address = \"\/dns4\/axon3\/tcp\/8001\/p2p\/$PEER_3\"/g" ${node_toml} 
-    sed -i "" "s/multi_address = \"\/dns4\/axon4\/.*\"/multi_address = \"\/dns4\/axon4\/tcp\/8001\/p2p\/$PEER_4\"/g" ${node_toml}    
+    sed -i "" "s/multi_address = \"\/dns4\/axon-1\/.*\"/multi_address = \"\/dns4\/axon-1\/tcp\/8001\/p2p\/$PEER_1\"/g" ${node_toml} 
+    sed -i "" "s/multi_address = \"\/dns4\/axon-2\/.*\"/multi_address = \"\/dns4\/axon-2\/tcp\/8001\/p2p\/$PEER_2\"/g" ${node_toml} 
+    sed -i "" "s/multi_address = \"\/dns4\/axon-3\/.*\"/multi_address = \"\/dns4\/axon-3\/tcp\/8001\/p2p\/$PEER_3\"/g" ${node_toml} 
+    sed -i "" "s/multi_address = \"\/dns4\/axon-4\/.*\"/multi_address = \"\/dns4\/axon-4\/tcp\/8001\/p2p\/$PEER_4\"/g" ${node_toml}    
 done
 ```
 
